@@ -1,0 +1,19 @@
+{
+  "name": "punnett-square",
+  "version": "1.0.0",
+  "description": "*** ## Synopsis ### Game <p>In the far reaches of the universe lies planet L2klbs. L2klbs is renowned for it's harsh weather and environment. It is up to you and your species to survive! </p>",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ellun/punnett-square.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ellun/punnett-square/issues"
+  },
+  "homepage": "https://github.com/Ellun/punnett-square#readme"
+}
