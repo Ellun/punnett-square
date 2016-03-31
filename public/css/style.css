@@ -1,0 +1,14 @@
+#home {
+  width: 50%;
+  height: 400px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #00CCFF;
+  border-radius: 5px;
+  text-align: center;
+}
+
+body {
+  background-image: url());
+}
