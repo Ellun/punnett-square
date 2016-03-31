@@ -11,9 +11,11 @@ const Link            = ReactRouter.Link;
 const browserHistory  = ReactRouter.browserHistory;
 const IndexRoute      = ReactRouter.IndexRoute;
 
-const Login           = require('./components/login/login.js')
-const Signup          = require('./components/login/signup.js')
-const Home            = require('./components/home.js')
+const Login           = require('./components/login/login.js');
+const Signup          = require('./components/login/signup.js');
+const Home            = require('./components/home.js');
+const Setting         = require('./components/setting.js');
+const UpdatePassword  = require('./components/login/updatePassword.js');
 
 const App = React.createClass({
   getInitialState : function () {
@@ -55,6 +57,8 @@ const routes = (
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/home" component={Home} />
+      <Route path="/settings" component={Setting} />
+      <Route path="/updatePassword" component={UpdatePassword} />
     </Route>
   </Router>
 )

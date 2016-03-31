@@ -4,6 +4,7 @@ import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler
 const App = require('../script.js')
 const Login = require('./login/login.js')
 const Signup = require('./login/signup.js')
+const Setting = require('./setting.js')
 
 const Home = React.createClass({
   contextTypes: {
@@ -12,10 +13,8 @@ const Home = React.createClass({
     router: React.PropTypes.object
   },
 
-  handleLogout : function() {
-    delete localStorage.token
-    this.context.setLoggedInTrue(false);
-    this.context.router.replace('/login')
+  handleSettings : function() {
+    this.context.router.replace('/settings')
   },
 
   render : function() {
@@ -25,7 +24,7 @@ const Home = React.createClass({
         <button>Instructions</button>
         <button>Play</button>
         <button>Scores</button>
-        <button onClick={this.handleLogout}>Logout</button>
+        <div onClick={this.handleSettings} id="settings"></div>
       </div>
     )
   }

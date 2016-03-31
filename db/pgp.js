@@ -27,9 +27,7 @@ function createSecure( username, password, callback ) {
   })
 }
 
-// JL create user from form
 function createUser( req, res, next ) {
-  console.log('I made it to createUser');
   createSecure( req.body.username, req.body.password, saveUser );
 
   function saveUser( username, hash ) {
@@ -37,7 +35,6 @@ function createUser( req, res, next ) {
     .then(function ( data ) {
       // success;
       res.rows = data;
-      console.log("I am in createUser");
       next();
     })
     .catch( function (error) {
@@ -47,7 +44,6 @@ function createUser( req, res, next ) {
   }
 }
 
-// JL Login user auth
 function loginUser( req, res, next ) {
   const username = req.body.username
   const password = req.body.password
@@ -67,5 +63,44 @@ function loginUser( req, res, next ) {
     })
 }
 
+function updatePassword( req, res, next) {
+  const currentPassword = req.body.currentPass
+  const newPassword = req.body.newPass
+  console.log('req:' ,req.user);
+
+  db.one("SELECT * FROM users WHERE user_id=($1)", [req.user.user_id])
+    .then( (data) => {
+      if ( bcrypt.compareSync( currentPassword, data.password_digest) ) {
+        console.log('this sorta works');
+        createSecure( data.username, newPassword, updateUser )
+        function updateUser(username, hash) {
+          db.none("UPDATE users SET password_digest=($1) WHERE user_id=($2) ", [ hash, req.user.user_id ])
+          .then( ()=> {
+            next()
+          })
+          .catch( ( error )=>{
+            console.log( error );
+          })
+        }
+        next();
+      }
+    })
+    .catch( ( error ) => {
+      console.log( 'error I suck: ', error );
+    })
+}
+
+function deleteUser ( req,res,next ) {
+  db.none('DELETE FROM users WHERE user_id=($1)', [req.user.user_id])
+  .then ( () => {
+    next();
+  })
+  .catch((error) => {
+    console.log( error)
+  })
+}
+
 module.exports.createUser = createUser;
 module.exports.loginUser = loginUser;
+module.exports.updatePassword = updatePassword;
+module.exports.deleteUser = deleteUser;

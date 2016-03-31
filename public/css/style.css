@@ -10,10 +10,10 @@
 }
 
 body {
-  background-image: url());
+  background-image: url();
 }
 
-#signup, #login {
+#signup, #login, .setting {
   width: 50%;
   margin: 0 auto;
   margin-top: 50px;
@@ -21,4 +21,17 @@ body {
   background-color: #00CCFF;
   border-radius: 5px;
   text-align: center;
+}
+
+#settings {
+  background-color: red;
+  height: 20px;
+  width: 20px;
+  float: right;
+  position: relative;
+  top: -80px;
+}
+
+li {
+  list-style-type: none;
 }
