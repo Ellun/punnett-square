@@ -22,7 +22,6 @@ users.delete( '/delete', expressJWT( { secret:secret } ), db.deleteUser, ( req,r
   res.send( 'deads' );
 });
 
-
 users.put( '/update', expressJWT( { secret:secret } ), db.updatePassword, ( req,res ) => {
   res.send( 'go' )
 });

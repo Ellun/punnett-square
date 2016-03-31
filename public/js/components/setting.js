@@ -1,6 +1,6 @@
 const $ = require('jquery');
 const React = require('react');
-import { browserHistory, Router, Route, ank, Redirect, Navigation, RouteHandler } from 'react-router'
+import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
 const App = require('../script.js')
 const Login = require('./login/login.js')
 const Signup = require('./login/signup.js')
@@ -50,6 +50,7 @@ const Setting = React.createClass({
           <li><a onClick={this.handleUpdatePassword}>Update Password</a></li>
           <li><a onClick={this.handleLogout}>Logout</a></li>
           <li><a onClick={this.handleDelete}>Delete Account</a></li>
+          <Link to="/home">back</Link>
         </ul>
       </div>
     )

@@ -16,6 +16,7 @@ const Signup          = require('./components/login/signup.js');
 const Home            = require('./components/home.js');
 const Setting         = require('./components/setting.js');
 const UpdatePassword  = require('./components/login/updatePassword.js');
+const Instructions    = require('./components/instructions.js');
 
 const App = React.createClass({
   getInitialState : function () {
@@ -59,6 +60,7 @@ const routes = (
       <Route path="/home" component={Home} />
       <Route path="/settings" component={Setting} />
       <Route path="/updatePassword" component={UpdatePassword} />
+      <Route path="/instructions" component={Instructions} />
     </Route>
   </Router>
 )

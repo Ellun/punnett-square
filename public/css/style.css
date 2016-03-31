@@ -13,7 +13,7 @@ body {
   background-image: url();
 }
 
-#signup, #login, .setting {
+#signup, #login, #instructions, .setting {
   width: 50%;
   margin: 0 auto;
   margin-top: 50px;
@@ -24,7 +24,7 @@ body {
 }
 
 #settings {
-  background-color: red;
+  background-image: url(../images/setting-cog.png);
   height: 20px;
   width: 20px;
   float: right;
