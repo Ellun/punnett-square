@@ -30,17 +30,26 @@ const Login = React.createClass({
   },
 
   render : function() {
-    return (
-      <div id="login">
-        <form ref="form" onSubmit={this.handleSubmit}>
-          <h1 id="header">Welcome back to punnett²!</h1>
-          <input id="loginUsername" type="text" ref="username" placeholder="username"/>
-          <input id="loginPassword" type="password" ref="password" placeholder="password" /><br />
-          <button type="submit">login</button>
-          <Link to="/signup">Signup</Link>
-        </form>
-      </div>
-    )
+    if (!localStorage.token) {
+      return (
+        <div id="login">
+          <form ref="form" onSubmit={this.handleSubmit}>
+            <h1 id="header">Welcome back to punnett²!</h1>
+            <input id="loginUsername" type="text" ref="username" placeholder="username"/>
+            <input id="loginPassword" type="password" ref="password" placeholder="password" /><br />
+            <button type="submit">login</button>
+            <Link to="/signup">Signup</Link>
+          </form>
+        </div>
+      )
+    } else {
+      return (
+        <div id="signup">
+          <h3>You are already signed in!</h3>
+          <Link to="/home">Home</Link>
+        </div>
+      )
+    }
   }
 })
 

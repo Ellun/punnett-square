@@ -50,7 +50,10 @@ const Signup = React.createClass({
       )
     } else {
       return (
-        <h1>NOPPPE</h1>
+        <div id="signup">
+          <h3>You are already signed in!</h3>
+          <Link to="/home">Home</Link>
+        </div>
       )
     }
   }
