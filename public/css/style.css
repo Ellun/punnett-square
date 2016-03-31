@@ -12,3 +12,13 @@
 body {
   background-image: url());
 }
+
+#signup, #login {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: #00CCFF;
+  border-radius: 5px;
+  text-align: center;
+}

@@ -1,25 +1,45 @@
+const $ = require('jquery');
 const React = require('react');
+import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
+const App = require('../../script.js')
+const Signup = require('./signup.js')
 
 const Login = React.createClass({
-  handleSubmit : function(event) {
-    event.preventDefault();
-    console.log('handleSubmit');
+
+  contextTypes: {
+    loggedIn: React.PropTypes.bool,
+    setLoggedInTrue: React.PropTypes.func,
+    router: React.PropTypes.object
   },
 
-  handleSignup : function(event) {
+  handleSubmit : function(event) {
     event.preventDefault();
-    console.log('handleSignup');
+    const username = this.refs.username.value
+    const password = this.refs.password.value
+
+    $.post('/users/login',{
+      username: username,
+      password: password
+    })
+    .done((data) => {
+      localStorage.token = data.token;
+      this.context.setLoggedInTrue(true);
+      this.context.router.replace('/home')
+    })
+    this.refs.form.reset()
   },
 
   render : function() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h1 id="header">punnett²</h1>
-        <input id="signupUsername" type="text" ref="username" placeholder="username"/>
-        <input id="signupPassword" type="password" ref="pass" placeholder="password" /><br />
-        <button type="submit">login</button>
-        <a onClick={this.handleSignup}>signup</a>
-      </form>
+      <div id="login">
+        <form ref="form" onSubmit={this.handleSubmit}>
+          <h1 id="header">Welcome back to punnett²!</h1>
+          <input id="loginUsername" type="text" ref="username" placeholder="username"/>
+          <input id="loginPassword" type="password" ref="password" placeholder="password" /><br />
+          <button type="submit">login</button>
+          <Link to="/signup">Signup</Link>
+        </form>
+      </div>
     )
   }
 })
