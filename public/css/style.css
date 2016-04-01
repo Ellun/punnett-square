@@ -61,18 +61,16 @@ li {
 #weather {
   width: 60%;
   height: 200px;
-  /*background-color: #00CCFF;*/
 }
 
 #habitat {
   width: 60%;
   height: 350px;
-  /*background-color: green;*/
 }
 
 .organisms {
-  width: 20%;
-  height: 40px;
+  width: 10%;
+  height: 20px;
   background-color: yellow;
-  margin: 5px;
+  position: relative;
 }

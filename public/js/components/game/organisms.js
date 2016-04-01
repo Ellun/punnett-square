@@ -11,6 +11,18 @@ const Organisms = React.createClass({
       return Math.floor(Math.random() * 2) + 1 ;
     }
 
+    function locationLeft() {
+      return Math.floor(Math.random() * 80) + 10 ;
+    }
+
+    function locationTop() {
+      return Math.floor(Math.random() * 100) + 1 ;
+    }
+
+    function time() {
+      return Math.floor(Math.random() * 8000) + 4000 ;
+    }
+
     function Organism() {
       this.hair = [gene(),gene()];
       this.fat = [gene(),gene()];
@@ -18,6 +30,14 @@ const Organisms = React.createClass({
       this.water = [gene(),gene()];
       this.sweat = [gene(),gene()];
       this.health = [gene(),gene()];
+    }
+
+    function hustle(){
+      var loop = 0;
+      while (loop < 500) {
+        $organism.animate({'left': locationLeft() + "%", 'top': locationTop() + "px"}, time())
+        loop ++
+      }
     }
 
     while (this.state.organisms.length < 10) {
@@ -30,8 +50,11 @@ const Organisms = React.createClass({
       $organism.attr('water',organism.water)
       $organism.attr('sweat',organism.sweat)
       $organism.attr('health',organism.health)
+      $organism.css('top', locationTop() + "px")
+      $organism.css('left', locationLeft() + "%")
       this.state.organisms.push($organism);
       $('#field').append($organism)
+      hustle();
     }
   },
 
