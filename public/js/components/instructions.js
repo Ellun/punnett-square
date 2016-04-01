@@ -9,8 +9,9 @@ const Instructions = React.createClass({
   render : function() {
     return (
       <div id="instructions">
+        <h1>Instructions</h1>
         <p> Stop sucking at games </p>
-        <Link to="/home">Home</Link>
+        <Link to="/home">Menu</Link>
       </div>
     )
   }
