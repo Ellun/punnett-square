@@ -13,7 +13,7 @@ body {
   background-image: url();
 }
 
-#signup, #login, #instructions, .setting {
+#signup, #login, #instructions, #scores, .setting {
   width: 50%;
   margin: 0 auto;
   margin-top: 50px;
@@ -34,4 +34,20 @@ body {
 
 li {
   list-style-type: none;
+}
+
+.instructions, .scores, .play {
+  padding: 14px 20px;
+  border-radius: 10px;
+  background-color: green;
+  color: white;
+  text-decoration: none;
+}
+
+#nope {
+  background-image: url(../images/nope.jpg);
+  width: 50%;
+  height: 800px;
+  margin: 0 auto;
+  text-align: center;
 }

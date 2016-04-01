@@ -5,16 +5,15 @@ const App = require('../script.js')
 const Setting = require('./setting.js')
 const Home = require('./home.js')
 
-const Instructions = React.createClass({
+const Scores = React.createClass({
   render : function() {
     return (
-      <div id="instructions">
-        <h1>Instructions</h1>
-        <p> Stop sucking at games </p>
-        <Link to="/home">Menu</Link>
+      <div id="scores">
+      <h1> Player Scores </h1>
+      <Link to="/home">Menu</Link>
       </div>
     )
   }
 })
 
-module.exports = Instructions;
+module.exports = Scores;
