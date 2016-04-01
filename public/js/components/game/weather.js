@@ -9,25 +9,25 @@ const Weather = React.createClass({
     var value = Math.floor(Math.random() * 4) + 1 ;
     switch (value) {
       case 1:
-        this.state.color = "#00CCFF";
+        this.state.backgroundImage = 'url(' + "../../../images/cold-weather.png" + ')';
         break;
       case 2:
-        this.state.color = "red";
+        this.state.backgroundImage = 'url(' + "../../../images/dry-weather.png" + ')';
         break;
       case 3:
-        this.state.color = "purple";
+        this.state.backgroundImage = 'url(' + "../../../images/rain-clouds.png" + ')';
         break;
       case 4:
-        this.state.color = "orange";
+        this.state.backgroundImage = 'url(' + "../../../images/dry-weather.png" + ')';
         break;
       default:
     }
-    this.setState({color:this.state.color})
+    this.setState({backgroundImage:this.state.backgroundImage})
   },
 
   getInitialState : function() {
     return {
-      color : "#00CCFF"
+      backgroundImage : 'url(' + "../../../images/dry-weather.png" + ')'
     }
   },
 
@@ -37,7 +37,7 @@ const Weather = React.createClass({
 
   render : function() {
     var style = {
-      backgroundColor: this.state.color
+      backgroundImage: this.state.backgroundImage
     }
     return (
       <div style={style} id="weather"></div>

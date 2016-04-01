@@ -69,8 +69,8 @@ li {
 }
 
 .organisms {
-  width: 10%;
+  width: 52px;
   height: 20px;
-  background-color: yellow;
+  background-image: url("../images/organism.png");
   position: relative;
 }
