@@ -51,3 +51,28 @@ li {
   margin: 0 auto;
   text-align: center;
 }
+
+#gameContainer {
+  width: 95%;
+  background-color: grey;
+  margin: 0 auto;
+}
+
+#weather {
+  width: 60%;
+  height: 200px;
+  /*background-color: #00CCFF;*/
+}
+
+#habitat {
+  width: 60%;
+  height: 350px;
+  /*background-color: green;*/
+}
+
+.organisms {
+  width: 20%;
+  height: 40px;
+  background-color: yellow;
+  margin: 5px;
+}
