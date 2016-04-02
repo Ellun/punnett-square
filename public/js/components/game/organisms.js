@@ -59,9 +59,18 @@ const Organisms = React.createClass({
       this.state.organisms.push($organism);
       $('#field').append($organism)
       hustle();
-      $organism.click((event)=> {
-      /*{event.target}*/
-        this.context.showStats([1,2,3,4])
+
+      $organism.click((event) => {
+        var target = event.target
+        var data = [
+          'hair :' + target.attributes[1].value + ' ',
+          'fat :' + target.attributes[2].value + ' ',
+          'land :' + target.attributes[3].value + ' ',
+          'water :' + target.attributes[4].value + ' ',
+          'sweat :' + target.attributes[5].value + ' ',
+          'health :' + target.attributes[6].value
+        ]
+        this.context.showStats(data)
       })
     }
   },
