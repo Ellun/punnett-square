@@ -68,6 +68,15 @@ li {
   height: 350px;
 }
 
+#stats {
+  float: right;
+  width: 40%;
+  background-color: blue;
+  height: 200px;
+  top: -550px;
+  position: relative;
+}
+
 .organisms {
   width: 52px;
   height: 20px;

@@ -4,6 +4,10 @@ import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler
 const Play = require('../play.js')
 
 const Organisms = React.createClass({
+  contextTypes: {
+    stats: React.PropTypes.array,
+    showStats: React.PropTypes.func,
+  },
 
   makeOrganisms : function() {
 
@@ -55,6 +59,10 @@ const Organisms = React.createClass({
       this.state.organisms.push($organism);
       $('#field').append($organism)
       hustle();
+      $organism.click((event)=> {
+      /*{event.target}*/
+        this.context.showStats([1,2,3,4])
+      })
     }
   },
 
