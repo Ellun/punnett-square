@@ -41,7 +41,6 @@ const Habitat = React.createClass({
     var intervalID = window.setInterval(this.updateHabitat, 2000);
   },
 
-
   render : function() {
     var style = {
       backgroundImage: this.state.backgroundImage

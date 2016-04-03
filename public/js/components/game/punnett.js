@@ -2,6 +2,7 @@ const $ = require('jquery');
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
 const Play = require('../play.js')
+const Organisms = require('./organisms.js')
 
 const Punnett = React.createClass({
 
@@ -47,6 +48,7 @@ const Punnett = React.createClass({
     $('#br').text(this.context.punnett1[y] + this.context.punnett2[y]);
   },
 
+
   render : function() {
     return (
       <div id="punnett">
@@ -57,21 +59,19 @@ const Punnett = React.createClass({
           <li value="4"className="punnett">Water</li>
           <li value="5"className="punnett">Sweat</li>
         </ul>
+
         <div id="tl">
         </div>
 
         <div id="bl">
-
         </div>
 
         <div id="tr">
-
-
         </div>
 
         <div id="br">
-
         </div>
+
       </div>
     )
   }

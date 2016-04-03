@@ -8,6 +8,7 @@ const Weather = require('./game/weather.js')
 const Habitat = require('./game/habitat.js')
 const Stats   = require('./game/stats.js')
 const Punnett   = require('./game/punnett.js')
+const Organisms   = require('./game/organisms.js')
 
 const Play = React.createClass({
 

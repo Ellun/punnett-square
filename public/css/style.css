@@ -144,28 +144,28 @@ body {
 #tl {
   background-color: green;
   float: left;
-  left: 25%;
-  top: 25%;
+  left: 30%;
+  top: 30%;
 }
 
 #bl {
   background-color: blue;
   float: left;
-  left: 25%;
+  left: 30%;
   top: 50%;
 }
 
 #tr {
   background-color: red;
   float: right;
-  right: 25%;
-  top: 25%;
+  right: 30%;
+  top: 30%;
 }
 
 #br {
   background-color: yellow;
   float: right;
-  right: 25%;
+  right: 30%;
   top: 50%;
 }
 
@@ -182,4 +182,11 @@ ul li {
 
 ul li:hover {
     background-color: grey;
+}
+
+#babies {
+  position: absolute;
+  width: 20%;
+  left: 40%;
+  top: 80%;
 }
