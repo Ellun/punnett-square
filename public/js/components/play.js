@@ -7,29 +7,57 @@ const Home = require('./home.js')
 const Weather = require('./game/weather.js')
 const Habitat = require('./game/habitat.js')
 const Stats   = require('./game/stats.js')
+const Punnett   = require('./game/punnett.js')
 
 const Play = React.createClass({
 
   getInitialState : function () {
     return {
-      stats : []
+      stats1 : [],
+      stats2 : [],
+      punnett1 : [],
+      punnett2 : []
     }
   },
 
   childContextTypes: {
-    stats: React.PropTypes.array,
-    showStats: React.PropTypes.func
+    stats1: React.PropTypes.array,
+    showStats1: React.PropTypes.func,
+    stats2: React.PropTypes.array,
+    showStats2: React.PropTypes.func,
+    punnett1: React.PropTypes.array,
+    showPunnett1: React.PropTypes.func,
+    punnett2: React.PropTypes.array,
+    showPunnett2: React.PropTypes.func
   },
 
   getChildContext: function(){
     return {
-     stats: this.state.stats,
-     showStats: this.showStats
+     stats1: this.state.stats1,
+     showStats1: this.showStats1,
+     stats2: this.state.stats2,
+     showStats2: this.showStats2,
+     punnett1: this.state.punnett1,
+     showPunnett1: this.showPunnett1,
+     punnett2: this.state.punnett2,
+     showPunnett2: this.showPunnett2
     }
   },
 
-  showStats : function(value) {
-    this.setState({stats: value});
+  showStats1 : function(value) {
+    this.setState({stats1: value});
+  },
+
+  showStats2 : function(value) {
+    this.setState({stats2: value});
+  },
+
+  showPunnett1 : function(value) {
+    this.setState({punnett1: value});
+  },
+
+  showPunnett2 : function(value) {
+    this.setState({punnett2: value});
   },
 
   render : function() {
@@ -39,6 +67,7 @@ const Play = React.createClass({
           <Weather/>
           <Habitat/>
           <Stats />
+          <Punnett />
           <Link to="/home">Menu</Link>
         </div>
       )

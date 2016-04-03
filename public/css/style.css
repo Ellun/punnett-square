@@ -1,12 +1,13 @@
 #home {
   width: 50%;
   height: 400px;
-  margin: 0 auto;
-  margin-top: 50px;
+  top: 10%;
+  left: 25%;
   padding: 20px;
   background-color: #00CCFF;
   border-radius: 5px;
   text-align: center;
+  position: absolute;
 }
 
 body {
@@ -27,13 +28,9 @@ body {
   background-image: url(../images/setting-cog.png);
   height: 20px;
   width: 20px;
-  float: right;
-  position: relative;
-  top: -80px;
-}
-
-li {
-  list-style-type: none;
+  right: 2%;
+  top: 5%;
+  position: absolute;
 }
 
 .instructions, .scores, .play {
@@ -53,28 +50,32 @@ li {
 }
 
 #gameContainer {
-  width: 95%;
+  width: 90%;
   background-color: grey;
+  height: 550px;
   margin: 0 auto;
+  position: relative;
 }
 
 #weather {
   width: 60%;
   height: 200px;
+  position: absolute;
 }
 
 #habitat {
   width: 60%;
   height: 350px;
+  position: absolute;
+  top: 200px;
 }
 
 #stats {
-  float: right;
+  left: 60%;
   width: 40%;
   background-color: blue;
   height: 200px;
-  top: -550px;
-  position: relative;
+  position: absolute;
 }
 
 .organisms {
@@ -82,4 +83,101 @@ li {
   height: 20px;
   background-image: url("../images/organism.png");
   position: relative;
+  z-index: 1;
+}
+
+#parent1, #parent2 {
+  width: 60px;
+  height: 30px;
+  background-color: red;
+  margin: 5px;
+  position:absolute;
+}
+
+#parent1 {
+  left: 15%;
+  top: 15%;
+}
+
+#parent2 {
+  right: 15%;
+  top: 15%;
+}
+
+#stats1, #stats2 {
+  background-color: green;
+  width: 90%;
+  position: absolute;;
+  height: 40px;
+  left: 5%;
+}
+
+#stats1 {
+  top: 40%;
+}
+
+#stats2 {
+  top: 70%;
+}
+
+#punnett {
+  background-color: purple;
+  top: 200px;
+  width: 40%;
+  height: 350px;
+  display: inline;
+  position: absolute;
+  left: 60%
+}
+
+#tl, #tr, #bl, #br {
+  width: 20%;
+  position: absolute;
+  height: 20%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 400%;
+}
+
+#tl {
+  background-color: green;
+  float: left;
+  left: 25%;
+  top: 25%;
+}
+
+#bl {
+  background-color: blue;
+  float: left;
+  left: 25%;
+  top: 50%;
+}
+
+#tr {
+  background-color: red;
+  float: right;
+  right: 25%;
+  top: 25%;
+}
+
+#br {
+  background-color: yellow;
+  float: right;
+  right: 25%;
+  top: 50%;
+}
+
+
+ul li {
+  display: inline;
+  list-style-type: none;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+ul li:hover {
+    background-color: grey;
 }
