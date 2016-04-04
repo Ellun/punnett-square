@@ -9,16 +9,16 @@ const Weather = React.createClass({
     var value = Math.floor(Math.random() * 4) + 1 ;
     switch (value) {
       case 1:
-        this.state.backgroundImage = 'url(' + "../../../images/cold-weather.png" + ')';
+        this.state.backgroundImage = 'url(' + "../../../images/bluesky.png" + ')';
         break;
       case 2:
-        this.state.backgroundImage = 'url(' + "../../../images/dry-weather.png" + ')';
+        this.state.backgroundImage = 'url(' + "../../../images/bluesky.png" + ')';
         break;
       case 3:
-        this.state.backgroundImage = 'url(' + "../../../images/rain-clouds.png" + ')';
+        this.state.backgroundImage = 'url(' + "../../../images/bluesky.png" + ')';
         break;
       case 4:
-        this.state.backgroundImage = 'url(' + "../../../images/dry-weather.png" + ')';
+        this.state.backgroundImage = 'url(' + "../../../images/bluesky.png" + ')';
         break;
       default:
     }
@@ -27,7 +27,7 @@ const Weather = React.createClass({
 
   getInitialState : function() {
     return {
-      backgroundImage : 'url(' + "../../../images/dry-weather.png" + ')'
+      backgroundImage : 'url(' + "../../../images/bluesky.png" + ')'
     }
   },
 

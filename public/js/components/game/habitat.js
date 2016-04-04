@@ -10,19 +10,19 @@ const Habitat = React.createClass({
     var value = Math.floor(Math.random() * 4) + 1 ;
     switch (value) {
       case 1:
-        this.state.backgroundImage = 'url(' + "../../../images/grasslands.png" + ')';
+        this.state.backgroundImage = 'url(' + "../../../images/greenbackground.png" + ')';
         this.state.habitat = "field"
         break;
       case 2:
-        this.state.backgroundImage = 'url(' + "../../../images/grasslands.png" + ')';
+        this.state.backgroundImage = 'url(' + "../../../images/greenbackground.png" + ')';
         this.state.habitat = "dry";
         break;
       case 3:
-        this.state.backgroundImage = 'url(' + "../../../images/grasslands.png" + ')';
+        this.state.backgroundImage = 'url(' + "../../../images/greenbackground.png" + ')';
         this.state.habitat = "ice"
         break;
       case 4:
-        this.state.backgroundImage = 'url(' + "../../../images/grasslands.png" + ')';
+        this.state.backgroundImage = 'url(' + "../../../images/greenbackground.png" + ')';
         this.state.habitat = "water"
         break;
       default:
@@ -32,7 +32,7 @@ const Habitat = React.createClass({
 
   getInitialState : function() {
     return {
-      backgroundImage : 'url(' + "../../../images/grasslands.png" + ')',
+      backgroundImage : 'url(' + "../../../images/greenbackground.png" + ')',
       habitat : "field"
     }
   },

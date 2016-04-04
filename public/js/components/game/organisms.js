@@ -17,17 +17,8 @@ const Organisms = React.createClass({
   },
 
   makeOrganisms : function(i, mode) {
-
-    function locationLeft() {
-      return Math.floor(Math.random() * 80) + 10 ;
-    }
-
-    function locationTop() {
-      return Math.floor(Math.random() * 100) + 1 ;
-    }
-
-    function time() {
-      return Math.floor(Math.random() * 8000) + 4000 ;
+    function rando(max,min) {
+      return Math.floor(Math.random() * (max - min)) + min;
     }
 
     var gene = (mode,x,y) => {
@@ -70,7 +61,7 @@ const Organisms = React.createClass({
     function hustle($organism){
       var loop = 0;
       while (loop < 500) {
-        $organism.animate({'left': locationLeft() + "%", 'top': locationTop() + "px"}, time())
+        $organism.animate({'left': rando(90, 1) + "%", 'top': rando(230,225) + "px"}, rando(8000,4000))
         loop ++
       }
     }
@@ -85,18 +76,19 @@ const Organisms = React.createClass({
     $organism.attr('water',organism.water)
     $organism.attr('sweat',organism.sweat)
     $organism.attr('health',organism.health)
-    $organism.css('top', locationTop() + "px")
-    $organism.css('left', locationLeft() + "%")
+    $organism.css('top', rando(230,225) + "px")
+    $organism.css('left', rando(90, 1) + "%")
     this.state.organisms.push($organism);
-    $('#field').append($organism)
+    $('#habitat').append($organism)
     $organism.draggable();
     hustle($organism);
 
     $organism.click((event) => {
       var target = event.target;
       var id = target.attributes[1].value
+      console.log('id', id);
       $("#" + id ).finish();
-      $('#field').droppable({drop: function(){
+      $('#habitat').droppable({drop: function(){
         hustle($("#" + id ));
       }});
 

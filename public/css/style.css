@@ -59,7 +59,7 @@ body {
 
 #weather {
   width: 60%;
-  height: 200px;
+  height: 500px;
   position: absolute;
 }
 
@@ -73,39 +73,40 @@ body {
 #stats {
   left: 60%;
   width: 40%;
-  background-color: blue;
+  background-color: grey;
   height: 200px;
   position: absolute;
 }
 
 .organisms {
-  width: 52px;
-  height: 20px;
-  background-image: url("../images/organism.png");
-  position: relative;
+  width: 50px;
+  height: 50px;
+  background-image: url("../images/stonedude.png");
+  position: absolute;
   z-index: 1;
 }
 
 #parent1, #parent2 {
-  width: 60px;
-  height: 30px;
-  background-color: red;
+  width: 50px;
+  height: 50px;
+  background-image: url("../images/dropstonedude.png");
   margin: 5px;
   position:absolute;
 }
 
 #parent1 {
   left: 15%;
-  top: 15%;
+  top: 10%;
 }
 
 #parent2 {
   right: 15%;
-  top: 15%;
+  top: 10%;
 }
 
 #stats1, #stats2 {
-  background-color: green;
+  background-color: black;
+  color: white;
   width: 90%;
   position: absolute;;
   height: 40px;
@@ -121,13 +122,13 @@ body {
 }
 
 #punnett {
-  background-color: purple;
+  background-color: grey;
   top: 200px;
   width: 40%;
   height: 350px;
   display: inline;
   position: absolute;
-  left: 60%
+  left: 60%;
 }
 
 #tl, #tr, #bl, #br {
@@ -139,31 +140,33 @@ body {
   line-height: 200%;
   font-size: 30px;
   font-family: sans-serif;
+  border: 1px solid black;
+  background-color: white;
 }
 
 #tl {
-  background-color: green;
+  /*background-color: green;*/
   float: left;
   left: 30%;
   top: 30%;
 }
 
 #bl {
-  background-color: blue;
+  /*background-color: blue;*/
   float: left;
   left: 30%;
   top: 50%;
 }
 
 #tr {
-  background-color: red;
+  /*background-color: red;*/
   float: right;
   right: 30%;
   top: 30%;
 }
 
 #br {
-  background-color: yellow;
+  /*background-color: yellow;*/
   float: right;
   right: 30%;
   top: 50%;
