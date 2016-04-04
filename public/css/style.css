@@ -78,6 +78,14 @@ body {
   position: absolute;
 }
 
+.helmet {
+  width: 50px;
+  height: 50px;
+  background-image: url("../images/helmet.png");
+  position: absolute;
+  z-index: 0;
+}
+
 .organisms {
   width: 50px;
   height: 50px;
@@ -174,12 +182,13 @@ body {
 
 
 ul li {
-  display: inline;
+  float: left;
+  width: 10%;
   list-style-type: none;
   padding: 10px 20px;
   background-color: black;
   color: white;
-  margin-right: 10px;
+  margin: 5px 5px;
   border-radius: 5px;
 }
 

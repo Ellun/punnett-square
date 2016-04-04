@@ -25,7 +25,7 @@ const Organisms = React.createClass({
       if (mode == "new") {
         var array = [];
         for (var i = 0; i < 2; i++) {
-          var value = Math.floor(Math.random() * 2) + 1 ;
+          var value = Math.floor(Math.random() * 3) + 1 ;
           array.push(value);
         }
         return array;
@@ -52,9 +52,9 @@ const Organisms = React.createClass({
     function Organism() {
       this.hair = gene(mode,0,1);
       this.fat = gene(mode,2,3);
-      this.land = gene(mode,4,5);
+      this.defense = gene(mode,4,5);
       this.water = gene(mode,6,7);
-      this.sweat = gene(mode,8,9);
+      this.bodyType = gene(mode,8,9);
       this.health = 100 ;
     }
 
@@ -72,22 +72,31 @@ const Organisms = React.createClass({
     $organism.attr('id','organisms' + i)
     $organism.attr('hair',organism.hair)
     $organism.attr('fat',organism.fat)
-    $organism.attr('land',organism.land)
+    $organism.attr('defense',organism.defense)
     $organism.attr('water',organism.water)
-    $organism.attr('sweat',organism.sweat)
+    $organism.attr('bodyType',organism.bodyType)
+    if ($organism.attr('bodyType') == [2,2]) {
+      $organism.css('background-image', 'url(../../../images/icedude.png)')
+    } else if ($organism.attr('bodyType') == [3,3]) {
+      $organism.css('background-image', 'url(../../../images/lavadude.png)')
+    }
     $organism.attr('health',organism.health)
     $organism.css('top', rando(230,225) + "px")
     $organism.css('left', rando(90, 1) + "%")
     this.state.organisms.push($organism);
     $('#habitat').append($organism)
+    var $helmet = $('<div>');
+    $helmet.addClass('helmet')
+    if ($organism.attr('defense') == [1,1]) {
+      $organism.append($helmet)
+    }
     $organism.draggable();
     hustle($organism);
 
     $organism.click((event) => {
-      var target = event.target;
+      var target = event.currentTarget;
       var id = target.attributes[1].value
-      console.log('id', id);
-      $("#" + id ).finish();
+      $("#" + id ).stop(true);
       $('#habitat').droppable({drop: function(){
         hustle($("#" + id ));
       }});
@@ -108,9 +117,9 @@ const Organisms = React.createClass({
       var dataText = [
         'hair :' + target.attributes[2].value + ' ',
         'fat :' + target.attributes[3].value + ' ',
-        'land :' + target.attributes[4].value + ' ',
+        'defense :' + target.attributes[4].value + ' ',
         'water :' + target.attributes[5].value + ' ',
-        'sweat :' + target.attributes[6].value + ' ',
+        'bodyType :' + target.attributes[6].value + ' ',
         'health :' + target.attributes[7].value
       ]
 

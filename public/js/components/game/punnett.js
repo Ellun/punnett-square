@@ -55,9 +55,9 @@ const Punnett = React.createClass({
         <ul onClick={this.handleClick}>
           <li value="1" className="punnett">Hair</li>
           <li value="2"className="punnett">Fat</li>
-          <li value="3"className="punnett">Land</li>
+          <li value="3"className="punnett">Defense</li>
           <li value="4"className="punnett">Water</li>
-          <li value="5"className="punnett">Sweat</li>
+          <li value="5"className="punnett">Body</li>
         </ul>
 
         <div id="tl">
