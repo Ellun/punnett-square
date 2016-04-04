@@ -6,22 +6,27 @@ const Organisms = require('./organisms.js')
 
 const Habitat = React.createClass({
 
+  contextTypes: {
+    turn: React.PropTypes.number,
+    showTurn: React.PropTypes.func
+  },
+
   updateHabitat : function() {
-    var value = Math.floor(Math.random() * 4) + 1 ;
+    var value = this.context.turn
     switch (value) {
       case 1:
         this.state.backgroundImage = 'url(' + "../../../images/greenbackground.png" + ')';
         this.state.habitat = "field"
         break;
-      case 2:
-        this.state.backgroundImage = 'url(' + "../../../images/greenbackground.png" + ')';
+      case 5:
+        this.state.backgroundImage = 'url(' + "../../../images/iceworld.png" + ')';
         this.state.habitat = "dry";
         break;
-      case 3:
-        this.state.backgroundImage = 'url(' + "../../../images/greenbackground.png" + ')';
+      case 10:
+        this.state.backgroundImage = 'url(' + "../../../images/landosand.png" + ')';
         this.state.habitat = "ice"
         break;
-      case 4:
+      case 15:
         this.state.backgroundImage = 'url(' + "../../../images/greenbackground.png" + ')';
         this.state.habitat = "water"
         break;
@@ -38,7 +43,7 @@ const Habitat = React.createClass({
   },
 
   componentDidMount : function() {
-    var intervalID = window.setInterval(this.updateHabitat, 2000);
+    var intervalID = window.setInterval(this.updateHabitat, 50);
   },
 
   render : function() {

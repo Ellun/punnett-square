@@ -17,7 +17,8 @@ const Play = React.createClass({
       stats1 : [],
       stats2 : [],
       punnett1 : [],
-      punnett2 : []
+      punnett2 : [],
+      turn : 1
     }
   },
 
@@ -29,7 +30,9 @@ const Play = React.createClass({
     punnett1: React.PropTypes.array,
     showPunnett1: React.PropTypes.func,
     punnett2: React.PropTypes.array,
-    showPunnett2: React.PropTypes.func
+    showPunnett2: React.PropTypes.func,
+    turn: React.PropTypes.number,
+    showTurn: React.PropTypes.func
   },
 
   getChildContext: function(){
@@ -41,7 +44,9 @@ const Play = React.createClass({
      punnett1: this.state.punnett1,
      showPunnett1: this.showPunnett1,
      punnett2: this.state.punnett2,
-     showPunnett2: this.showPunnett2
+     showPunnett2: this.showPunnett2,
+     turn: this.state.turn,
+     showTurn: this.showTurn
     }
   },
 
@@ -59,6 +64,10 @@ const Play = React.createClass({
 
   showPunnett2 : function(value) {
     this.setState({punnett2: value});
+  },
+
+  showTurn : function(value) {
+    this.setState({turn: value});
   },
 
   render : function() {

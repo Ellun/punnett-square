@@ -5,19 +5,24 @@ const Play = require('../play.js')
 
 const Weather = React.createClass({
 
+  contextTypes: {
+    turn: React.PropTypes.number,
+    showTurn: React.PropTypes.func
+  },
+
   updateWeather : function() {
-    var value = Math.floor(Math.random() * 4) + 1 ;
+    var value = this.context.turn
     switch (value) {
       case 1:
         this.state.backgroundImage = 'url(' + "../../../images/bluesky.png" + ')';
         break;
-      case 2:
-        this.state.backgroundImage = 'url(' + "../../../images/bluesky.png" + ')';
+      case 5:
+        this.state.backgroundImage = 'url(' + "../../../images/cold.png" + ')';
         break;
-      case 3:
-        this.state.backgroundImage = 'url(' + "../../../images/bluesky.png" + ')';
+      case 10:
+        this.state.backgroundImage = 'url(' + "../../../images/sunny.png" + ')';
         break;
-      case 4:
+      case 15:
         this.state.backgroundImage = 'url(' + "../../../images/bluesky.png" + ')';
         break;
       default:
@@ -32,7 +37,7 @@ const Weather = React.createClass({
   },
 
   componentDidMount : function() {
-    var intervalID = window.setInterval(this.updateWeather, 500);
+    var intervalID = window.setInterval(this.updateWeather, 50);
   },
 
   render : function() {
@@ -40,7 +45,9 @@ const Weather = React.createClass({
       backgroundImage: this.state.backgroundImage
     }
     return (
-      <div style={style} id="weather"></div>
+      <div style={style} id="weather">
+        <h3>Round: {this.context.turn}</h3>
+      </div>
     )
   }
 })

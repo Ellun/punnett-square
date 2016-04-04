@@ -13,7 +13,9 @@ const Organisms = React.createClass({
     punnett1: React.PropTypes.array,
     showPunnett1: React.PropTypes.func,
     punnett2: React.PropTypes.array,
-    showPunnett2: React.PropTypes.func
+    showPunnett2: React.PropTypes.func,
+    turn: React.PropTypes.number,
+    showTurn: React.PropTypes.func
   },
 
   makeOrganisms : function(i, mode) {
@@ -31,7 +33,6 @@ const Organisms = React.createClass({
         return array;
       } else {
         var value = Math.floor(Math.random() * 4) + 1 ;
-        console.log('this is context',this.context.punnett1);
         switch (value) {
           case 1:
             return [this.context.punnett1[x], this.context.punnett2[x]];
@@ -134,7 +135,29 @@ const Organisms = React.createClass({
     })
   },
 
+  dmgs : function() {
+    for (var i = 0; i < this.state.organisms.length; i++) {
+      var health = hair + fat + defense + water + body;
+      handleBaby(i, health)
+    }
+  },
+
   handleBaby : function() {
+    this.context.showTurn(this.context.turn + 1)
+    for (var i = 0; i < this.state.organisms.length; i++) {
+      var $health = this.state.organisms[i][0].attributes[7].value - 100
+      if ($health <= 0) {
+        this.state.organisms[i].remove()
+        this.state.organisms.splice(i,1)
+        i --;
+        console.log(this.state.organisms.length);
+        if (this.state.organisms.length <= 1) {
+          console.log('you lose');
+        }
+      } else {
+        this.state.organisms[i][0].attributes[7].value = $health
+      }
+    }
     this.makeOrganisms($.now(),'woot')
   },
 
