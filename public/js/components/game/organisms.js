@@ -199,6 +199,7 @@ const Organisms = React.createClass({
         if (this.state.organisms.length <= 1) {
           alert("You Lost")
           this.loser();
+          break;
         }
       } else {
         this.state.organisms[i][0].attributes[7].value = $health
@@ -208,7 +209,39 @@ const Organisms = React.createClass({
   },
 
   loser : function() {
-    console.log('yo');
+    var score = this.context.turn * 100;
+    $.get({
+      url : '/score',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
+      }
+    })
+    .done((data)=>{
+      if (data == "wrong wrong wrong") {
+        $.post({
+          url : '/score',
+          data : {
+            score : score
+          },
+          beforeSend: function( xhr ) {
+            xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
+          }
+        })
+      } else {
+        if (data.score < score) {
+          $.ajax({
+            url : '/score',
+            type : 'put',
+            data : {
+              score : score
+            },
+            beforeSend: function( xhr ) {
+              xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
+            }
+          })
+        }
+      }
+    })
   },
 
   componentDidMount : function() {
