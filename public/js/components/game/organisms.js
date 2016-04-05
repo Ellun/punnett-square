@@ -90,11 +90,11 @@ const Organisms = React.createClass({
     $organism.css('left', rando(90, 1) + "%")
     this.state.organisms.push($organism);
     $('#habitat').append($organism)
-    var $helmet = $('<div>');
-    $helmet.addClass('helmet')
-    if ($organism.attr('defense') == [1,1]) {
-      $organism.append($helmet)
-    }
+    // var $helmet = $('<div>');
+    // $helmet.addClass('helmet')
+    // if ($organism.attr('defense') == [1,1]) {
+    //   $organism.append($helmet)
+    // }
     $organism.draggable();
     hustle($organism);
 
@@ -119,12 +119,17 @@ const Organisms = React.createClass({
         target.attributes[6].value[2]
       ]
 
+      // var dataText = [
+      //   'hair :' + target.attributes[2].value + ' ',
+      //   'fat :' + target.attributes[3].value + ' ',
+      //   'defense :' + target.attributes[4].value + ' ',
+      //   'water :' + target.attributes[5].value + ' ',
+      //   'bodyType :' + target.attributes[6].value + ' ',
+      //   'health :' + target.attributes[7].value
+      // ]
+
       var dataText = [
-        'hair :' + target.attributes[2].value + ' ',
-        'fat :' + target.attributes[3].value + ' ',
-        'defense :' + target.attributes[4].value + ' ',
-        'water :' + target.attributes[5].value + ' ',
-        'bodyType :' + target.attributes[6].value + ' ',
+        'Body Type :' + target.attributes[6].value + ' ',
         'health :' + target.attributes[7].value
       ]
 
