@@ -6,28 +6,31 @@ const Play = require('../play.js')
 const Weather = React.createClass({
 
   contextTypes: {
-    turn: React.PropTypes.number,
-    showTurn: React.PropTypes.func
+    turn : React.PropTypes.number,
+    showTurn : React.PropTypes.func,
+    weather : React.PropTypes.bool,
+    showWeather : React.PropTypes.func,
+    habitat : React.PropTypes.bool,
+    showHabitat : React.PropTypes.func
   },
 
   updateWeather : function() {
-    var value = this.context.turn
+    var value = Math.floor(Math.random() * 3) + 1;
+    var background = this.state.backgroundImage;
     switch (value) {
       case 1:
-        this.state.backgroundImage = 'url(' + "../../../images/bluesky.png" + ')';
+        background = 'url(' + "../../../images/bluesky.png" + ')';
         break;
-      case 5:
-        this.state.backgroundImage = 'url(' + "../../../images/cold.png" + ')';
+      case 2:
+        background = 'url(' + "../../../images/cold.png" + ')';
         break;
-      case 10:
-        this.state.backgroundImage = 'url(' + "../../../images/sunny.png" + ')';
-        break;
-      case 15:
-        this.state.backgroundImage = 'url(' + "../../../images/bluesky.png" + ')';
+      case 3:
+        background = 'url(' + "../../../images/sunny.png" + ')';
         break;
       default:
+        break;
     }
-    this.setState({backgroundImage:this.state.backgroundImage})
+    this.setState({backgroundImage:background})
   },
 
   getInitialState : function() {
@@ -37,7 +40,12 @@ const Weather = React.createClass({
   },
 
   componentDidMount : function() {
-    var intervalID = window.setInterval(this.updateWeather, 50);
+    var intervalID = window.setInterval(() => {
+      if (this.context.weather == true) {
+        this.updateWeather()
+        this.context.showWeather(false)
+      }
+    }, 100);
   },
 
   render : function() {

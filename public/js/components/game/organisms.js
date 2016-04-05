@@ -15,24 +15,28 @@ const Organisms = React.createClass({
     punnett2: React.PropTypes.array,
     showPunnett2: React.PropTypes.func,
     turn: React.PropTypes.number,
-    showTurn: React.PropTypes.func
+    showTurn: React.PropTypes.func,
+    weather : React.PropTypes.bool,
+    showWeather : React.PropTypes.func,
+    habitat : React.PropTypes.bool,
+    showHabitat : React.PropTypes.func
   },
 
   makeOrganisms : function(i, mode) {
     function rando(max,min) {
-      return Math.floor(Math.random() * (max - min)) + min;
+      return Math.floor(Math.random() * max) + min;
     }
 
     var gene = (mode,x,y) => {
       if (mode == "new") {
         var array = [];
         for (var i = 0; i < 2; i++) {
-          var value = Math.floor(Math.random() * 3) + 1 ;
+          var value = rando(3,1);
           array.push(value);
         }
         return array;
       } else {
-        var value = Math.floor(Math.random() * 4) + 1 ;
+        var value = rando(4,1);
         switch (value) {
           case 1:
             return [this.context.punnett1[x], this.context.punnett2[x]];
@@ -62,7 +66,7 @@ const Organisms = React.createClass({
     function hustle($organism){
       var loop = 0;
       while (loop < 500) {
-        $organism.animate({'left': rando(90, 1) + "%", 'top': rando(230,225) + "px"}, rando(8000,4000))
+        $organism.animate({'left': rando(90, 1) + "%", 'top': rando(5,225) + "px"}, rando(8000,4000))
         loop ++
       }
     }
@@ -82,7 +86,7 @@ const Organisms = React.createClass({
       $organism.css('background-image', 'url(../../../images/lavadude.png)')
     }
     $organism.attr('health',organism.health)
-    $organism.css('top', rando(230,225) + "px")
+    $organism.css('top', rando(5,225) + "px")
     $organism.css('left', rando(90, 1) + "%")
     this.state.organisms.push($organism);
     $('#habitat').append($organism)
@@ -136,21 +140,38 @@ const Organisms = React.createClass({
   },
 
   dmgs : function() {
-    for (var i = 0; i < this.state.organisms.length; i++) {
-      var health = hair + fat + defense + water + body;
+    var organisms = this.state.organisms
+    for (var i = 0; i < organisms.length; i++) {
+      if (organisms[i][0].attributes[6].value != [2,2] && (this.context.turns > 4 && this.context.turns < 11)) {
+        body = 5
+      } else {
+        body = 0
+      }
+      var health = 5 + body;
       handleBaby(i, health)
     }
   },
 
   handleBaby : function() {
+    var organisms = this.state.organisms
     this.context.showTurn(this.context.turn + 1)
+    if (this.context.turn % 5 == 0) {
+      this.context.showWeather(true);
+      this.context.showHabitat(true);
+    }
     for (var i = 0; i < this.state.organisms.length; i++) {
-      var $health = this.state.organisms[i][0].attributes[7].value - 5
+      if ((organisms[i][0].attributes[6].value != [2,2]) && (this.context.turn > 4 && this.context.turn < 11)
+    || (organisms[i][0].attributes[6].value != [3,3]) && (this.context.turn > 9 && this.context.turn < 16)) {
+        var damages = 15
+      } else {
+        var damages = 0
+      }
+      var health = 5 + damages;
+      var $health = this.state.organisms[i][0].attributes[7].value - health
       if ($health <= 0) {
         this.state.organisms[i].remove()
         this.state.organisms.splice(i,1)
         i --;
-        console.log(this.state.organisms.length);
         if (this.state.organisms.length <= 1) {
           console.log('you lose');
         }

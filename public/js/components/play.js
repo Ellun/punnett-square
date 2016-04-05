@@ -18,7 +18,9 @@ const Play = React.createClass({
       stats2 : [],
       punnett1 : [],
       punnett2 : [],
-      turn : 1
+      turn : 1,
+      weather : false,
+      habitat : false
     }
   },
 
@@ -32,7 +34,11 @@ const Play = React.createClass({
     punnett2: React.PropTypes.array,
     showPunnett2: React.PropTypes.func,
     turn: React.PropTypes.number,
-    showTurn: React.PropTypes.func
+    showTurn: React.PropTypes.func,
+    weather : React.PropTypes.bool,
+    showWeather : React.PropTypes.func,
+    habitat : React.PropTypes.bool,
+    showHabitat : React.PropTypes.func
   },
 
   getChildContext: function(){
@@ -46,7 +52,11 @@ const Play = React.createClass({
      punnett2: this.state.punnett2,
      showPunnett2: this.showPunnett2,
      turn: this.state.turn,
-     showTurn: this.showTurn
+     showTurn: this.showTurn,
+     weather : this.state.weather,
+     showWeather : this.showWeather,
+     habitat : this.state.habitat,
+     showHabitat : this.showHabitat
     }
   },
 
@@ -68,6 +78,14 @@ const Play = React.createClass({
 
   showTurn : function(value) {
     this.setState({turn: value});
+  },
+
+  showWeather : function(value) {
+    this.setState({weather: value});
+  },
+
+  showHabitat: function(value) {
+    this.setState({habitat: value});
   },
 
   render : function() {

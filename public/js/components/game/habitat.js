@@ -8,31 +8,33 @@ const Habitat = React.createClass({
 
   contextTypes: {
     turn: React.PropTypes.number,
-    showTurn: React.PropTypes.func
+    showTurn: React.PropTypes.func,
+    weather : React.PropTypes.bool,
+    showWeather : React.PropTypes.func,
+    habitat : React.PropTypes.bool,
+    showHabitat : React.PropTypes.func
   },
 
   updateHabitat : function() {
-    var value = this.context.turn
+    var value = Math.floor(Math.random() * 3) + 1;
+    var background = this.state.backgroundImage;
     switch (value) {
       case 1:
-        this.state.backgroundImage = 'url(' + "../../../images/greenbackground.png" + ')';
+        background = 'url(' + "../../../images/greenbackground.png" + ')';
         this.state.habitat = "field"
         break;
-      case 5:
-        this.state.backgroundImage = 'url(' + "../../../images/iceworld.png" + ')';
+      case 2:
+        background = 'url(' + "../../../images/iceworld.png" + ')';
         this.state.habitat = "dry";
         break;
-      case 10:
-        this.state.backgroundImage = 'url(' + "../../../images/landosand.png" + ')';
+      case 3:
+        background = 'url(' + "../../../images/landosand.png" + ')';
         this.state.habitat = "ice"
         break;
-      case 15:
-        this.state.backgroundImage = 'url(' + "../../../images/greenbackground.png" + ')';
-        this.state.habitat = "water"
-        break;
       default:
+        break;
     }
-    this.setState({backgroundImage:this.state.backgroundImage, habitat:this.state.habitat})
+    this.setState({backgroundImage:background, habitat:this.state.habitat})
   },
 
   getInitialState : function() {
@@ -43,7 +45,12 @@ const Habitat = React.createClass({
   },
 
   componentDidMount : function() {
-    var intervalID = window.setInterval(this.updateHabitat, 50);
+    var intervalID = window.setInterval(() => {
+      if (this.context.habitat == true) {
+        this.updateHabitat()
+        this.context.showHabitat(false)
+      }
+    }, 100);
   },
 
   render : function() {
