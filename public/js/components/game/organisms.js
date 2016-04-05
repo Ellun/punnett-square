@@ -2,7 +2,9 @@ const $ = require('jquery');
 require('jquery-ui')
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const Play = require('../play.js')
+const Play = require('../play.js');
+const Weather = require('./weather.js');
+const Habitat = require('./habitat.js');
 
 const Organisms = React.createClass({
   contextTypes: {
@@ -19,7 +21,9 @@ const Organisms = React.createClass({
     weather : React.PropTypes.bool,
     showWeather : React.PropTypes.func,
     habitat : React.PropTypes.bool,
-    showHabitat : React.PropTypes.func
+    showHabitat : React.PropTypes.func,
+    weatherImage : React.PropTypes.string,
+    habitatImage : React.PropTypes.string,
   },
 
   makeOrganisms : function(i, mode) {
@@ -144,47 +148,67 @@ const Organisms = React.createClass({
     })
   },
 
-  dmgs : function() {
-    var organisms = this.state.organisms
-    for (var i = 0; i < organisms.length; i++) {
-      if (organisms[i][0].attributes[6].value != [2,2] && (this.context.turns > 4 && this.context.turns < 11)) {
-        body = 5
-      } else {
-        body = 0
-      }
-      var health = 5 + body;
-      handleBaby(i, health)
-    }
-  },
-
   handleBaby : function() {
     var organisms = this.state.organisms
     this.context.showTurn(this.context.turn + 1)
-    if (this.context.turn % 5 == 0) {
+    if (this.context.turn % 10 == 0) {
       this.context.showWeather(true);
       this.context.showHabitat(true);
     }
     for (var i = 0; i < this.state.organisms.length; i++) {
-      if ((organisms[i][0].attributes[6].value != [2,2]) && (this.context.turn > 4 && this.context.turn < 11)
-    || (organisms[i][0].attributes[6].value != [3,3]) && (this.context.turn > 9 && this.context.turn < 16)) {
-        var damages = 15
+      var coldWeather = 'url(' + "../../../images/cold.png" + ')';
+      var coldHabitat = 'url(' + "../../../images/iceworld.png" + ')';
+      var hotWeather = 'url(' + "../../../images/sunny.png" + ')';
+      var hotHabitat = 'url(' + "../../../images/landosand.png" + ')';
+      var weather = this.context.weatherImage;
+      var habitat = this.context.habitatImage;
+      var organismBody = organisms[i][0].attributes[6].value
+
+      // Damage caused by the weather
+      if (((organismBody == [3,3]) && (weather == coldWeather)) || //checks lavagolems
+          ((organismBody == [2,2]) && (weather == hotWeather))     //checks icegolems
+      ){
+        var weatherDMGs = 25
+      } else if (((organismBody != [2,2]) && (weather == coldWeather)) || //accounts for reg golems
+                 ((organismBody != [3,3]) && (weather == hotWeather))
+        ){
+        var weatherDMGs = 20
       } else {
-        var damages = 0
+        weatherDMGs = 0 //if they golem matches the environment, no additional damage is delt
       }
-      var health = 5 + damages;
+
+      // Damage cause by the habitat
+      if (((organismBody == [3,3]) && (habitat == coldHabitat)) || //checks lavagolems
+          ((organismBody == [2,2]) && (habitat == hotHabitat))     //checks icegolems
+      ){
+        var habitatDMGs = 25
+      } else if (((organismBody != [2,2]) && (habitat == coldHabitat)) || //accounts for reg golems
+                 ((organismBody != [3,3]) && (habitat == hotHabitat))
+        ){
+        var habitatDMGs = 20
+      } else {
+        habitatDMGs = 0 //if they golem matches the environment, no additional damage is delt
+      }
+
+      var health = 10 + weatherDMGs + habitatDMGs;
       var $health = this.state.organisms[i][0].attributes[7].value - health
       if ($health <= 0) {
         this.state.organisms[i].remove()
         this.state.organisms.splice(i,1)
         i --;
         if (this.state.organisms.length <= 1) {
-          console.log('you lose');
+          alert("You Lost")
+          this.loser();
         }
       } else {
         this.state.organisms[i][0].attributes[7].value = $health
       }
     }
     this.makeOrganisms($.now(),'woot')
+  },
+
+  loser : function() {
+    console.log('yo');
   },
 
   componentDidMount : function() {

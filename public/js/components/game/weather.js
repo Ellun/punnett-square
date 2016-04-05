@@ -1,9 +1,18 @@
 const $ = require('jquery');
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const Play = require('../play.js')
+const Play = require('../play.js');
 
 const Weather = React.createClass({
+
+  componentDidMount : function() {
+    var intervalID = window.setInterval(() => {
+      if (this.context.weather == true) {
+        this.updateWeather()
+        this.context.showWeather(false)
+      }
+    }, 100);
+  },
 
   contextTypes: {
     turn : React.PropTypes.number,
@@ -11,12 +20,14 @@ const Weather = React.createClass({
     weather : React.PropTypes.bool,
     showWeather : React.PropTypes.func,
     habitat : React.PropTypes.bool,
-    showHabitat : React.PropTypes.func
+    showHabitat : React.PropTypes.func,
+    weatherImage : React.PropTypes.string,
+    weatherBackground : React.PropTypes.func
   },
 
   updateWeather : function() {
     var value = Math.floor(Math.random() * 3) + 1;
-    var background = this.state.backgroundImage;
+    var background = this.context.weatherImage;
     switch (value) {
       case 1:
         background = 'url(' + "../../../images/bluesky.png" + ')';
@@ -30,27 +41,12 @@ const Weather = React.createClass({
       default:
         break;
     }
-    this.setState({backgroundImage:background})
-  },
-
-  getInitialState : function() {
-    return {
-      backgroundImage : 'url(' + "../../../images/bluesky.png" + ')'
-    }
-  },
-
-  componentDidMount : function() {
-    var intervalID = window.setInterval(() => {
-      if (this.context.weather == true) {
-        this.updateWeather()
-        this.context.showWeather(false)
-      }
-    }, 100);
+    this.context.weatherBackground(background)
   },
 
   render : function() {
     var style = {
-      backgroundImage: this.state.backgroundImage
+      backgroundImage: this.context.weatherImage
     }
     return (
       <div style={style} id="weather">

@@ -20,7 +20,9 @@ const Play = React.createClass({
       punnett2 : [],
       turn : 1,
       weather : false,
-      habitat : false
+      habitat : false,
+      weatherImage : 'url(' + "../../../images/bluesky.png" + ')',
+      habitatImage : 'url(' + "../../../images/greenbackground.png" + ')'
     }
   },
 
@@ -38,7 +40,11 @@ const Play = React.createClass({
     weather : React.PropTypes.bool,
     showWeather : React.PropTypes.func,
     habitat : React.PropTypes.bool,
-    showHabitat : React.PropTypes.func
+    showHabitat : React.PropTypes.func,
+    weatherImage : React.PropTypes.string,
+    weatherBackground : React.PropTypes.func,
+    habitatImage : React.PropTypes.string,
+    habitatBackground : React.PropTypes.func,
   },
 
   getChildContext: function(){
@@ -56,7 +62,11 @@ const Play = React.createClass({
      weather : this.state.weather,
      showWeather : this.showWeather,
      habitat : this.state.habitat,
-     showHabitat : this.showHabitat
+     showHabitat : this.showHabitat,
+     weatherImage : this.state.weatherImage,
+     weatherBackground : this.weatherBackground,
+     habitatImage : this.state.habitatImage,
+     habitatBackground : this.habitatBackground
     }
   },
 
@@ -86,6 +96,14 @@ const Play = React.createClass({
 
   showHabitat: function(value) {
     this.setState({habitat: value});
+  },
+
+  weatherBackground: function(value) {
+    this.setState({weatherImage: value});
+  },
+
+  habitatBackground: function(value) {
+    this.setState({habitatImage: value});
   },
 
   render : function() {

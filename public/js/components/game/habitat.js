@@ -6,44 +6,6 @@ const Organisms = require('./organisms.js')
 
 const Habitat = React.createClass({
 
-  contextTypes: {
-    turn: React.PropTypes.number,
-    showTurn: React.PropTypes.func,
-    weather : React.PropTypes.bool,
-    showWeather : React.PropTypes.func,
-    habitat : React.PropTypes.bool,
-    showHabitat : React.PropTypes.func
-  },
-
-  updateHabitat : function() {
-    var value = Math.floor(Math.random() * 3) + 1;
-    var background = this.state.backgroundImage;
-    switch (value) {
-      case 1:
-        background = 'url(' + "../../../images/greenbackground.png" + ')';
-        this.state.habitat = "field"
-        break;
-      case 2:
-        background = 'url(' + "../../../images/iceworld.png" + ')';
-        this.state.habitat = "dry";
-        break;
-      case 3:
-        background = 'url(' + "../../../images/landosand.png" + ')';
-        this.state.habitat = "ice"
-        break;
-      default:
-        break;
-    }
-    this.setState({backgroundImage:background, habitat:this.state.habitat})
-  },
-
-  getInitialState : function() {
-    return {
-      backgroundImage : 'url(' + "../../../images/greenbackground.png" + ')',
-      habitat : "field"
-    }
-  },
-
   componentDidMount : function() {
     var intervalID = window.setInterval(() => {
       if (this.context.habitat == true) {
@@ -53,9 +15,42 @@ const Habitat = React.createClass({
     }, 100);
   },
 
+  contextTypes: {
+    turn: React.PropTypes.number,
+    showTurn: React.PropTypes.func,
+    weather : React.PropTypes.bool,
+    showWeather : React.PropTypes.func,
+    habitat : React.PropTypes.bool,
+    showHabitat : React.PropTypes.func,
+    habitatImage : React.PropTypes.string,
+    habitatBackground : React.PropTypes.func
+  },
+
+  updateHabitat : function() {
+    var value = Math.floor(Math.random() * 3) + 1;
+    var background = this.context.habitatImage;
+    switch (value) {
+      case 1:
+        background = 'url(' + "../../../images/greenbackground.png" + ')';
+
+        break;
+      case 2:
+        background = 'url(' + "../../../images/iceworld.png" + ')';
+
+        break;
+      case 3:
+        background = 'url(' + "../../../images/landosand.png" + ')';
+
+        break;
+      default:
+        break;
+    }
+    this.context.habitatBackground(background)
+  },
+
   render : function() {
     var style = {
-      backgroundImage: this.state.backgroundImage
+      backgroundImage: this.context.habitatImage
     }
     return (
       <div style={style} id="habitat">
