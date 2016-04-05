@@ -145,7 +145,7 @@ const Organisms = React.createClass({
   handleBaby : function() {
     this.context.showTurn(this.context.turn + 1)
     for (var i = 0; i < this.state.organisms.length; i++) {
-      var $health = this.state.organisms[i][0].attributes[7].value - 100
+      var $health = this.state.organisms[i][0].attributes[7].value - 5
       if ($health <= 0) {
         this.state.organisms[i].remove()
         this.state.organisms.splice(i,1)
