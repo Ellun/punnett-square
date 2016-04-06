@@ -18,6 +18,7 @@ const Play = React.createClass({
       stats2 : [],
       punnett1 : [],
       punnett2 : [],
+      score : [],
       turn : 1,
       weather : false,
       habitat : false,

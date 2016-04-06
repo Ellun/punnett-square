@@ -10,6 +10,29 @@ const Scores = require('./scores.js')
 const Play = require('./play.js')
 
 const Home = React.createClass({
+
+  getInitialState : function() {
+    return {
+      score : []
+    }
+  },
+
+  childContextTypes: {
+    score: React.PropTypes.array,
+    showScore: React.PropTypes.func,
+  },
+
+  getChildContext: function(){
+    return {
+      score : this.state.score,
+      showScore : this.showScore
+    }
+  },
+
+  showScore : function(value) {
+    this.setState({score: value});
+  },
+
   contextTypes: {
     loggedIn: React.PropTypes.bool,
     setLoggedInTrue: React.PropTypes.func,
