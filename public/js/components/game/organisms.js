@@ -77,6 +77,8 @@ const Organisms = React.createClass({
 
     var organism = new Organism();
     var $organism = $('<div>');
+    var $floatingStats = $('<div>');
+    $floatingStats.addClass('floatingStats')
     $organism.addClass('organisms')
     $organism.attr('id','organisms' + i)
     $organism.attr('hair',organism.hair)
@@ -101,6 +103,15 @@ const Organisms = React.createClass({
     // }
     $organism.draggable();
     hustle($organism);
+
+    $organism.hover((event) => {
+      var $target = event.currentTarget;
+      $('.floatingStats').text('Traits:' + $target.attributes[6].value + ', Health:' + $target.attributes[7].value);
+    },
+      () => {
+        $('.floatingStats').empty();
+      }
+    )
 
     $organism.mousedown((event) => {
       var target = event.currentTarget;
@@ -151,7 +162,7 @@ const Organisms = React.createClass({
   handleBaby : function() {
     var organisms = this.state.organisms
     this.context.showTurn(this.context.turn + 1)
-    if (this.context.turn % 10 == 0) {
+    if (this.context.turn % 5 == 0) {
       this.context.showWeather(true);
       this.context.showHabitat(true);
     }
@@ -261,6 +272,7 @@ const Organisms = React.createClass({
   render : function() {
     return (
       <div id="field">
+        <div className="floatingStats"></div>
         <button id="babies" onClick={this.handleBaby} type="submit">Procreate</button>
       </div>
     )
