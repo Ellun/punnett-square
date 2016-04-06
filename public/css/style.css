@@ -196,6 +196,10 @@ ul li:hover {
     background-color: grey;
 }
 
+li {
+  list-style-type: none;
+}
+
 #babies {
   position: absolute;
   width: 20%;

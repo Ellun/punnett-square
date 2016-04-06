@@ -141,12 +141,15 @@ function updateScore (req, res, next) {
 }
 
 function allScores (req, res, next) {
-  db.any('SELECT users.username, scores.score FROM users INNER JOIN scores ON users.user_id=scores.user_id ORDER BY score desc LIMIT 10')
+  console.log('yayayayayaayayayayayayaya');
+  db.any('SELECT users.username, scores.score FROM users INNER JOIN scores ON users.user_id=scores.user_id ORDER BY score desc LIMIT 10;')
   .then ((data)=>{
+    console.log('data from sql',data);
     res.rows = data;
     next();
   })
   .catch((error) => {
+    console.log("you are hitting this");
     console.log( error)
     res.rows = "wrong wrong wrong"
     next()

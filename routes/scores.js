@@ -7,7 +7,8 @@ const db          = require( '../db/pgp.js' );
 
 scores.route('/highscores')
   .get(db.allScores, (req,res)=>{
-    res.send(res.rows)
+    console.log('I am at scores.js');
+    res.json(res.rows)
   })
 
 scores.route('/')

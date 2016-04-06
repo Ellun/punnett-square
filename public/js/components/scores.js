@@ -7,27 +7,46 @@ const Home = require('./home.js')
 
 const Scores = React.createClass({
 
-  contextTypes: {
+  getInitialState : function() {
+    return {
+      score : []
+    }
+  },
+
+  childContextTypes: {
     score: React.PropTypes.array,
-    showScore: React.PropTypes.func
+    showScore: React.PropTypes.func,
+  },
+
+  getChildContext: function(){
+    return {
+      score : this.state.score,
+      showScore : this.showScore
+    }
   },
 
   componentDidMount : function() {
-    $.get({
-      url : '/highscores'
+    $.ajax({
+      url : '/score/highscores',
+      type : 'get',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
+      }
     })
     .done((data)=>{
-      console.log('data',data);
-      console.log(this.context.score);
-      // this.context.showScore(data)
+      this.setState({score: data})
     })
   },
 
   render : function() {
+    var array = [];
+    this.state.score.forEach((el)=>{
+      array.push(<li><strong>Player:</strong> {el.username},  <strong>Score:</strong> {el.score}</li>)
+    })
     return (
       <div id="scores">
       <h1> Player Scores </h1>
-      {this.context.score}
+      {array}
       <Link to="/home">Menu</Link>
       </div>
     )
