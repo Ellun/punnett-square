@@ -100,6 +100,7 @@ body {
   background-image: url("../images/dropstonedude.png");
   margin: 5px;
   position:absolute;
+  border-radius: 10px;
 }
 
 #parent1 {
@@ -115,10 +116,12 @@ body {
 #stats1, #stats2 {
   background-color: black;
   color: white;
-  width: 90%;
+  width: 50%;
   position: absolute;;
-  height: 40px;
-  left: 5%;
+  height: 30px;
+  left: 25%;
+  text-align: center;
+  border-radius: 10px;
 }
 
 #stats1 {
@@ -245,4 +248,24 @@ li {
   width: 20%;
   left: 40%;
   top: 80%;
+}
+
+.floatingStats {
+  text-align: center;
+  position: absolute;
+  left: 35%;
+  width: 30%;
+  color: black;
+  border-radius: 10px;
+  font-size: 20px;
+  background-color: #00CC00;
+}
+
+#stork {
+  background-image: url("../images/stork.png");
+  width: 150px;
+  height: 50px;
+  position: absolute;
+  float: right;
+  right: 0px;
 }

@@ -26,7 +26,7 @@ const Organisms = React.createClass({
     habitatImage : React.PropTypes.string,
   },
 
-  makeOrganisms : function(i, mode) {
+  makeOrganisms : function(i, mode, topPosition) {
     function rando(max,min) {
       return Math.floor(Math.random() * max) + min;
     }
@@ -92,8 +92,8 @@ const Organisms = React.createClass({
       $organism.css('background-image', 'url(../../../images/lavadude.png)')
     }
     $organism.attr('health',organism.health)
-    $organism.css('top', rando(5,225) + "px")
-    $organism.css('left', rando(90, 1) + "%")
+    $organism.css('top', topPosition)
+    $organism.css('left', '50%')
     this.state.organisms.push($organism);
     $('#habitat').append($organism)
     // var $helmet = $('<div>');
@@ -106,10 +106,12 @@ const Organisms = React.createClass({
 
     $organism.hover((event) => {
       var $target = event.currentTarget;
-      $('.floatingStats').text('Traits:' + $target.attributes[6].value + ', Health:' + $target.attributes[7].value);
+      $('.floatingStats').text('Traits:' + $target.attributes[6].value + ' Health:' + $target.attributes[7].value);
+      $('.floatingStats').css('border', '1px solid black')
     },
       () => {
         $('.floatingStats').empty();
+        $('.floatingStats').css('border', 'none');
       }
     )
 
@@ -145,7 +147,7 @@ const Organisms = React.createClass({
 
       var dataText = [
         'Body Type :' + target.attributes[6].value + ' ',
-        'health :' + target.attributes[7].value
+        'Health :' + target.attributes[7].value
       ]
 
       $('#parent1').droppable({drop:()=>{
@@ -159,7 +161,18 @@ const Organisms = React.createClass({
     })
   },
 
+  dropOff : function() {
+    var $stork = $('<div>');
+    $stork.attr('id', 'stork');
+    $('#habitat').append($stork);
+    $stork.animate({'right': '90%'}, 5000)
+    setTimeout(function() {
+      $stork.remove()
+    }, 5000)
+  },
+
   handleBaby : function() {
+    this.dropOff()
     var organisms = this.state.organisms
     this.context.showTurn(this.context.turn + 1)
     if (this.context.turn % 5 == 0) {
@@ -216,7 +229,9 @@ const Organisms = React.createClass({
         this.state.organisms[i][0].attributes[7].value = $health
       }
     }
-    this.makeOrganisms($.now(),'woot')
+    setTimeout(()=> {
+      this.makeOrganisms($.now(),'woot','7%')
+    }, 2200)
   },
 
   loser : function() {
@@ -258,7 +273,7 @@ const Organisms = React.createClass({
   componentDidMount : function() {
     if (this.state.organisms.length === 0) {
       for (var i = 0; i < 10; i++) {
-        this.makeOrganisms($.now(),"new")
+        this.makeOrganisms($.now(),"new",'225px')
       }
     }
   },
