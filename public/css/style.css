@@ -152,6 +152,47 @@ body {
   background-color: white;
 }
 
+.tl, .tr, .bl, .br {
+  width: 10%;
+  position: absolute;
+  height: 10%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 130%;
+  font-size: 30px;
+  font-family: sans-serif;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.tl {
+  /*background-color: red;*/
+  float: left;
+  left: 30%;
+  top: 20%;
+}
+
+.bl {
+  /*background-color: blue;*/
+  float: left;
+  left: 50%;
+  top: 20%;
+}
+
+.tr {
+  /*background-color: green;*/
+  float: left;
+  left: 20%;
+  top: 30%;
+}
+
+.br {
+  /*background-color: purple;*/
+  float: left;
+  left: 20%;
+  top: 50%;
+}
+
 #tl {
   /*background-color: green;*/
   float: left;

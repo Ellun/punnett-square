@@ -37,7 +37,8 @@
  * view the environment details
  * track my high-score
  * compare my score to other players
-
+ * see the top 10 high-scores of all time
+ 
 ***
 
 ## Database ERD

@@ -46,6 +46,11 @@ const Punnett = React.createClass({
     $('#bl').text(this.context.punnett1[x] + this.context.punnett2[y]);
     $('#tr').text(this.context.punnett1[y] + this.context.punnett2[x]);
     $('#br').text(this.context.punnett1[y] + this.context.punnett2[y]);
+
+    $('.tl').text(this.context.punnett1[x]);
+    $('.bl').text(this.context.punnett1[y]);
+    $('.tr').text(this.context.punnett2[x]);
+    $('.br').text(this.context.punnett2[y]);
   },
 
 
@@ -60,17 +65,17 @@ const Punnett = React.createClass({
           <li value="5"className="punnett">Body</li>
         </ul>
 
-        <div id="tl">
-        </div>
+        <div id="tl"></div>
+        <div className="tl"></div>
 
-        <div id="bl">
-        </div>
+        <div id="bl"></div>
+        <div className="bl"></div>
 
-        <div id="tr">
-        </div>
+        <div id="tr"></div>
+        <div className="tr"></div>
 
-        <div id="br">
-        </div>
+        <div id="br"></div>
+        <div className="br"></div>
 
       </div>
     )

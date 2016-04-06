@@ -102,7 +102,7 @@ const Organisms = React.createClass({
     $organism.draggable();
     hustle($organism);
 
-    $organism.click((event) => {
+    $organism.mousedown((event) => {
       var target = event.currentTarget;
       var id = target.attributes[1].value
       $("#" + id ).stop(true);
@@ -140,7 +140,7 @@ const Organisms = React.createClass({
       $('#parent1').droppable({drop:()=>{
         this.context.showStats1(dataText)
         this.context.showPunnett1(data)
-      }});
+      }})
       $('#parent2').droppable({drop:()=>{
         this.context.showStats2(dataText)
         this.context.showPunnett2(data)
