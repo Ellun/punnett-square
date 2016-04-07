@@ -167,15 +167,6 @@ const Organisms = React.createClass({
         target.attributes[6].value[2]
       ]
 
-      // var dataText = [
-      //   'hair :' + target.attributes[2].value + ' ',
-      //   'fat :' + target.attributes[3].value + ' ',
-      //   'defense :' + target.attributes[4].value + ' ',
-      //   'water :' + target.attributes[5].value + ' ',
-      //   'bodyType :' + target.attributes[6].value + ' ',
-      //   'health :' + target.attributes[7].value
-      // ]
-
       var dataText = [
         'Body Type :' + target.attributes[6].value + ' ',
         'Health :' + target.attributes[7].value
@@ -213,72 +204,82 @@ const Organisms = React.createClass({
   },
 
   handleBaby : function() {
-    this.dropOff()
-    var organisms = this.state.organisms
-    this.context.showTurn(this.context.turn + 1)
-    if (this.context.turn % 5 == 0) {
-      this.context.showWeather(true);
-      this.context.showHabitat(true);
-    }
-    for (var i = 0; i < this.state.organisms.length; i++) {
-      var coldWeather = 'url(' + "../../../images/cold.png" + ')';
-      var coldHabitat = 'url(' + "../../../images/iceworld.png" + ')';
-      var hotWeather = 'url(' + "../../../images/sunny.png" + ')';
-      var hotHabitat = 'url(' + "../../../images/landosand.png" + ')';
-      var weather = this.context.weatherImage;
-      var habitat = this.context.habitatImage;
-      var organismBody = organisms[i][0].attributes[6].value
+    if ((this.context.punnett1.length == 0) || (this.context.punnett2.length == 0)) {
+      var $error = $('<div>').attr('id', 'error');
+      $error.click(()=>{
+        $error.remove();
+      })
+      var div = $('<div>').addClass('error').append('<p>Uh Oh, looks like you forgot to select your parents!</p>');
+      $error.append(div)
+      $('#weather').append($error)
+    } else {
+      this.dropOff()
+      var organisms = this.state.organisms
+      this.context.showTurn(this.context.turn + 1)
+      if (this.context.turn % 5 == 0) {
+        this.context.showWeather(true);
+        this.context.showHabitat(true);
+      }
+      for (var i = 0; i < this.state.organisms.length; i++) {
+        var coldWeather = 'url(' + "../../../images/cold.png" + ')';
+        var coldHabitat = 'url(' + "../../../images/iceworld.png" + ')';
+        var hotWeather = 'url(' + "../../../images/sunny.png" + ')';
+        var hotHabitat = 'url(' + "../../../images/landosand.png" + ')';
+        var weather = this.context.weatherImage;
+        var habitat = this.context.habitatImage;
+        var organismBody = organisms[i][0].attributes[6].value
 
-      // Damage caused by the weather
-      if (((organismBody == ['L','L']) && (weather == coldWeather)) || //checks lavagolems
-          ((organismBody == ['I','I']) && (weather == hotWeather))     //checks icegolems
-      ){
-        var weatherDMGs = 20
-      } else if (((organismBody != ['I','I']) && (weather == coldWeather)) || //accounts for reg golems
-                 ((organismBody != ['L','L']) && (weather == hotWeather))
+        // Damage caused by the weather
+        if (((organismBody == ['L','L']) && (weather == coldWeather)) || //checks lavagolems
+            ((organismBody == ['I','I']) && (weather == hotWeather))     //checks icegolems
         ){
-        var weatherDMGs = 15
-      } else {
-        weatherDMGs = 0 //if they golem matches the environment, no additional damage is delt
-      }
+          var weatherDMGs = 20
+        } else if (((organismBody != ['I','I']) && (weather == coldWeather)) || //accounts for reg golems
+                   ((organismBody != ['L','L']) && (weather == hotWeather))
+          ){
+          var weatherDMGs = 15
+        } else {
+          weatherDMGs = 0 //if they golem matches the environment, no additional damage is delt
+        }
 
-      // Damage cause by the habitat
-      if (((organismBody == ['L','L']) && (habitat == coldHabitat)) || //checks lavagolems
-          ((organismBody == ['I','I']) && (habitat == hotHabitat))     //checks icegolems
-      ){
-        var habitatDMGs = 20
-      } else if (((organismBody != ["I","I"]) && (habitat == coldHabitat)) || //accounts for reg golems
-                 ((organismBody != ['L','L']) && (habitat == hotHabitat))
+        // Damage cause by the habitat
+        if (((organismBody == ['L','L']) && (habitat == coldHabitat)) || //checks lavagolems
+            ((organismBody == ['I','I']) && (habitat == hotHabitat))     //checks icegolems
         ){
-        var habitatDMGs = 15
-      } else {
-        habitatDMGs = 0 //if they golem matches the environment, no additional damage is delt
-      }
+          var habitatDMGs = 20
+        } else if (((organismBody != ["I","I"]) && (habitat == coldHabitat)) || //accounts for reg golems
+                   ((organismBody != ['L','L']) && (habitat == hotHabitat))
+          ){
+          var habitatDMGs = 15
+        } else {
+          habitatDMGs = 0 //if they golem matches the environment, no additional damage is delt
+        }
 
-      var health = 10 + weatherDMGs + habitatDMGs;
-      var $health = this.state.organisms[i][0].attributes[7].value - health
-      if ($health <= 0) {
-        if (this.state.organisms[i][0].attributes[1].value == this.state.iAmMom) {
-          this.context.showStats1([])
-          this.context.showPunnett1([])
-        } else if (this.state.organisms[i][0].attributes[1].value == this.state.iAmDad) {
-          this.context.showStats2([])
-          this.context.showPunnett2([])
+        var health = 10 + weatherDMGs + habitatDMGs;
+        var $health = this.state.organisms[i][0].attributes[7].value - health
+        if ($health <= 0) {
+          if (this.state.organisms[i][0].attributes[1].value == this.state.iAmMom) {
+            this.context.showStats1([])
+            this.context.showPunnett1([])
+          } else if (this.state.organisms[i][0].attributes[1].value == this.state.iAmDad) {
+            this.context.showStats2([])
+            this.context.showPunnett2([])
+          }
+          this.state.organisms[i].remove()
+          this.state.organisms.splice(i,1)
+          i --;
+          if (this.state.organisms.length <= 1) {
+            this.loser();
+            break;
+          }
+        } else {
+          this.state.organisms[i][0].attributes[7].value = $health
         }
-        this.state.organisms[i].remove()
-        this.state.organisms.splice(i,1)
-        i --;
-        if (this.state.organisms.length <= 1) {
-          this.loser();
-          break;
-        }
-      } else {
-        this.state.organisms[i][0].attributes[7].value = $health
       }
+      setTimeout(()=> {
+        this.makeOrganisms($.now(),'woot','7%')
+      }, 2200)
     }
-    setTimeout(()=> {
-      this.makeOrganisms($.now(),'woot','7%')
-    }, 2200)
   },
 
   loser : function() {
@@ -322,7 +323,7 @@ const Organisms = React.createClass({
     return (
       <div id="field">
         <div className="floatingStats"></div>
-        <button id="babies" onClick={this.handleBaby} type="submit">Procreate</button>
+          <button id="babies" onClick={this.handleBaby} type="submit">Procreate</button>
       </div>
     )
   }

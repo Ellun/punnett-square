@@ -299,9 +299,18 @@ li {
 
 #babies {
   position: absolute;
+  border: none;
   width: 20%;
   left: 40%;
-  top: 80%;
+  top: 90%;
+  color: #F8F8F8;
+  background-color: #00CCFF;
+  border-radius: 10px;
+  border: 5px solid #0099FF;
+}
+
+#babies:hover {
+  background-color: #0099FF;
 }
 
 .floatingStats {
@@ -322,4 +331,29 @@ li {
   position: absolute;
   float: right;
   right: 0px;
+}
+
+#arrow {
+  height: 50px;
+  width: 80px;
+  position: absolute;
+  background-image: url("../images/arrow.png");
+  left: 100%;
+  z-index: 1;
+  top: 5%;
+}
+
+#error {
+  width: 70%;
+  height: 200px;
+  position: absolute;
+  left: 15%;
+  color: #F8F8F8;
+  background-color: #00CCFF;
+  border-radius: 10px;
+  border: 5px solid #0099FF;
+}
+
+.error {
+  font-size: 40px;
 }
