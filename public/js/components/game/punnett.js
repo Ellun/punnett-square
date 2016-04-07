@@ -13,44 +13,53 @@ const Punnett = React.createClass({
     showPunnett2: React.PropTypes.func
   },
 
-  handleClick : function(event) {
-    event.preventDefault()
-    var value = event.target.value
-    var x = '';
-    var y = '';
-    switch (value) {
-      case 1:
-        x = 0;
-        y = 1;
-        break;
-      case 2:
-        x = 2;
-        y = 3;
-        break;
-      case 3:
-        x = 4;
-        y = 5;
-        break;
-      case 4:
-        x = 6;
-        y = 7;
-        break;
-      case 5:
-        x = 8;
-        y = 9;
-        break;
-      default:
-        break;
-    }
-    $('#tl').text(this.context.punnett1[x] + this.context.punnett2[x]);
-    $('#bl').text(this.context.punnett1[x] + this.context.punnett2[y]);
-    $('#tr').text(this.context.punnett1[y] + this.context.punnett2[x]);
-    $('#br').text(this.context.punnett1[y] + this.context.punnett2[y]);
+  updateSquares : function() {
+    console.log('hi');
+    var x = 8;
+    var y = 9;
+      if ((this.context.punnett1.length > 0) && (this.context.punnett2.length > 0)) {
+      $('#tl').text(this.context.punnett1[x] + this.context.punnett2[x]);
+      $('#bl').text(this.context.punnett1[x] + this.context.punnett2[y]);
+      $('#tr').text(this.context.punnett1[y] + this.context.punnett2[x]);
+      $('#br').text(this.context.punnett1[y] + this.context.punnett2[y]);
 
-    $('.tl').text(this.context.punnett1[x]);
-    $('.bl').text(this.context.punnett1[y]);
-    $('.tr').text(this.context.punnett2[x]);
-    $('.br').text(this.context.punnett2[y]);
+      $('.tl').text(this.context.punnett1[x]);
+      $('.bl').text(this.context.punnett1[y]);
+      $('.tr').text(this.context.punnett2[x]);
+      $('.br').text(this.context.punnett2[y]);
+    }
+  },
+
+  componentDidMount : function() {
+    var intervalID = window.setInterval(() => {
+      this.updateSquares();
+      // var value = event.target.value
+
+      // switch (value) {
+      //   case 1:
+      //     x = 0;
+      //     y = 1;
+      //     break;
+      //   case 2:
+      //     x = 2;
+      //     y = 3;
+      //     break;
+      //   case 3:
+      //     x = 4;
+      //     y = 5;
+      //     break;
+      //   case 4:
+      //     x = 6;
+      //     y = 7;
+      //     break;
+      //   case 5:
+      //     x = 8;
+      //     y = 9;
+      //     break;
+      //   default:
+      //     break;
+      // }
+    }, 500);
   },
 
 
@@ -61,9 +70,6 @@ const Punnett = React.createClass({
     // <li value="4"className="punnett">Water</li>
     return (
       <div id="punnett">
-        <ul onClick={this.handleClick}>
-          <li value="5"className="punnett">Body</li>
-        </ul>
 
         <div id="tl"></div>
         <div className="tl"></div>

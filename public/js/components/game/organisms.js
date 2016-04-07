@@ -35,7 +35,20 @@ const Organisms = React.createClass({
       if (mode == "new") {
         var array = [];
         for (var i = 0; i < 2; i++) {
-          var value = rando(3,1);
+          var number = rando(3,1);
+          switch (number) {
+            case 1:
+              var value = 'N';
+              break;
+            case 2:
+              value = 'I';
+              break;
+            case 3:
+              value = 'L';
+              break;
+            default:
+              break;
+          }
           array.push(value);
         }
         return array;
@@ -86,9 +99,9 @@ const Organisms = React.createClass({
     $organism.attr('defense',organism.defense)
     $organism.attr('water',organism.water)
     $organism.attr('bodyType',organism.bodyType)
-    if ($organism.attr('bodyType') == [2,2]) {
+    if ($organism.attr('bodyType') == ['I','I']) {
       $organism.css('background-image', 'url(../../../images/icedude.png)')
-    } else if ($organism.attr('bodyType') == [3,3]) {
+    } else if ($organism.attr('bodyType') == ['L','L']) {
       $organism.css('background-image', 'url(../../../images/lavadude.png)')
     }
     $organism.attr('health',organism.health)
@@ -187,14 +200,15 @@ const Organisms = React.createClass({
       var weather = this.context.weatherImage;
       var habitat = this.context.habitatImage;
       var organismBody = organisms[i][0].attributes[6].value
+      console.log(organismBody);
 
       // Damage caused by the weather
-      if (((organismBody == [3,3]) && (weather == coldWeather)) || //checks lavagolems
-          ((organismBody == [2,2]) && (weather == hotWeather))     //checks icegolems
+      if (((organismBody == ['L','L']) && (weather == coldWeather)) || //checks lavagolems
+          ((organismBody == ['I','I']) && (weather == hotWeather))     //checks icegolems
       ){
         var weatherDMGs = 25
-      } else if (((organismBody != [2,2]) && (weather == coldWeather)) || //accounts for reg golems
-                 ((organismBody != [3,3]) && (weather == hotWeather))
+      } else if (((organismBody != ['I','I']) && (weather == coldWeather)) || //accounts for reg golems
+                 ((organismBody != ['L','L']) && (weather == hotWeather))
         ){
         var weatherDMGs = 20
       } else {
@@ -202,12 +216,12 @@ const Organisms = React.createClass({
       }
 
       // Damage cause by the habitat
-      if (((organismBody == [3,3]) && (habitat == coldHabitat)) || //checks lavagolems
-          ((organismBody == [2,2]) && (habitat == hotHabitat))     //checks icegolems
+      if (((organismBody == ['L','L']) && (habitat == coldHabitat)) || //checks lavagolems
+          ((organismBody == ['I','I']) && (habitat == hotHabitat))     //checks icegolems
       ){
         var habitatDMGs = 25
-      } else if (((organismBody != [2,2]) && (habitat == coldHabitat)) || //accounts for reg golems
-                 ((organismBody != [3,3]) && (habitat == hotHabitat))
+      } else if (((organismBody != ["I","I"]) && (habitat == coldHabitat)) || //accounts for reg golems
+                 ((organismBody != ['L','L']) && (habitat == hotHabitat))
         ){
         var habitatDMGs = 20
       } else {
