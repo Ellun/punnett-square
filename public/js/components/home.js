@@ -27,7 +27,7 @@ const Home = React.createClass({
         <div id="header">punnett²</div>
         <Link className="play" to="/play">Play</Link>
         <Link className="scores" to="/scores">Scores</Link>
-        <Link className="instructions" to="/instructions">Instuctions</Link>
+        <Link className="instructions" to="/instructions">Instructions</Link>
         <Link id="settings" to="/settings"></Link>
       </div>
     )
