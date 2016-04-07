@@ -24,7 +24,7 @@ const Home = React.createClass({
   render : function() {
     return (
       <div id="home">
-        <h1 id="header">punnett²</h1>
+        <div id="header">punnett²</div>
         <Link className="play" to="/play">Play</Link>
         <Link className="scores" to="/scores">Scores</Link>
         <Link className="instructions" to="/instructions">Instuctions</Link>

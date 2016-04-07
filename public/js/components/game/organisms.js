@@ -24,6 +24,7 @@ const Organisms = React.createClass({
     showHabitat : React.PropTypes.func,
     weatherImage : React.PropTypes.string,
     habitatImage : React.PropTypes.string,
+    router: React.PropTypes.object
   },
 
   makeOrganisms : function(i, mode, topPosition) {
@@ -235,7 +236,6 @@ const Organisms = React.createClass({
         this.state.organisms.splice(i,1)
         i --;
         if (this.state.organisms.length <= 1) {
-          alert("You Lost")
           this.loser();
           break;
         }
@@ -282,6 +282,7 @@ const Organisms = React.createClass({
         }
       }
     })
+    this.context.router.replace('/home')
   },
 
   componentDidMount : function() {

@@ -34,7 +34,7 @@ const Login = React.createClass({
       return (
         <div id="login">
           <form ref="form" onSubmit={this.handleSubmit}>
-            <h1 id="header">Welcome back to punnett²!</h1>
+            <h1 className="header">Welcome back to punnett²!</h1>
             <input id="loginUsername" type="text" ref="username" placeholder="username"/>
             <input id="loginPassword" type="password" ref="password" placeholder="password" /><br />
             <button type="submit">login</button>
