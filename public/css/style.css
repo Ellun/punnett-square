@@ -10,6 +10,14 @@
   position: absolute;
 }
 
+#toHome {
+  position: absolute;
+  text-decoration: none;
+  color: #F8F8F8;
+  top: 5%;
+  left: 2%;
+}
+
 body {
   background: url("../images/bodyBackground.png") no-repeat center center fixed;
   -webkit-background-size: cover;

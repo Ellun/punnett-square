@@ -115,7 +115,6 @@ const Play = React.createClass({
           <Habitat/>
           <Stats />
           <Punnett />
-          <Link to="/home">Menu</Link>
         </div>
       )
     } else {

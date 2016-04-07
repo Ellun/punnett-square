@@ -16,6 +16,7 @@ const Stats = React.createClass({
     return (
       <div id="stats">
         <Link id="settings" to="/settings"></Link>
+        <Link id="toHome" to="/home">Menu</Link>
         <div id="stats1">
           {this.context.stats1}
         </div>
