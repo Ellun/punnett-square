@@ -7,6 +7,23 @@ const Weather = require('./weather.js');
 const Habitat = require('./habitat.js');
 
 const Organisms = React.createClass({
+
+  componentDidMount : function() {
+    if (this.state.organisms.length === 0) {
+      for (var i = 0; i < 10; i++) {
+        this.makeOrganisms($.now(),"new",'225px')
+      }
+    }
+  },
+
+  getInitialState : function() {
+    return {
+      organisms : [],
+      iAmMom : '',
+      iAmDad : ''
+    }
+  },
+
   contextTypes: {
     stats1: React.PropTypes.array,
     showStats1: React.PropTypes.func,
@@ -167,10 +184,20 @@ const Organisms = React.createClass({
       $('#parent1').droppable({drop:()=>{
         this.context.showStats1(dataText)
         this.context.showPunnett1(data)
+        this.setState({iAmMom:target.attributes[1].value})
+      }},{out:()=>{
+        this.context.showStats1([])
+        this.context.showPunnett1([])
+        this.setState({iAmMom:''})
       }})
       $('#parent2').droppable({drop:()=>{
         this.context.showStats2(dataText)
         this.context.showPunnett2(data)
+        this.setState({iAmDad:target.attributes[1].value})
+      }},{out:()=>{
+        this.context.showStats2([])
+        this.context.showPunnett2([])
+        this.setState({iAmDad:''})
       }});
     })
   },
@@ -201,17 +228,16 @@ const Organisms = React.createClass({
       var weather = this.context.weatherImage;
       var habitat = this.context.habitatImage;
       var organismBody = organisms[i][0].attributes[6].value
-      console.log(organismBody);
 
       // Damage caused by the weather
       if (((organismBody == ['L','L']) && (weather == coldWeather)) || //checks lavagolems
           ((organismBody == ['I','I']) && (weather == hotWeather))     //checks icegolems
       ){
-        var weatherDMGs = 25
+        var weatherDMGs = 20
       } else if (((organismBody != ['I','I']) && (weather == coldWeather)) || //accounts for reg golems
                  ((organismBody != ['L','L']) && (weather == hotWeather))
         ){
-        var weatherDMGs = 20
+        var weatherDMGs = 15
       } else {
         weatherDMGs = 0 //if they golem matches the environment, no additional damage is delt
       }
@@ -220,11 +246,11 @@ const Organisms = React.createClass({
       if (((organismBody == ['L','L']) && (habitat == coldHabitat)) || //checks lavagolems
           ((organismBody == ['I','I']) && (habitat == hotHabitat))     //checks icegolems
       ){
-        var habitatDMGs = 25
+        var habitatDMGs = 20
       } else if (((organismBody != ["I","I"]) && (habitat == coldHabitat)) || //accounts for reg golems
                  ((organismBody != ['L','L']) && (habitat == hotHabitat))
         ){
-        var habitatDMGs = 20
+        var habitatDMGs = 15
       } else {
         habitatDMGs = 0 //if they golem matches the environment, no additional damage is delt
       }
@@ -232,6 +258,13 @@ const Organisms = React.createClass({
       var health = 10 + weatherDMGs + habitatDMGs;
       var $health = this.state.organisms[i][0].attributes[7].value - health
       if ($health <= 0) {
+        if (this.state.organisms[i][0].attributes[1].value == this.state.iAmMom) {
+          this.context.showStats1([])
+          this.context.showPunnett1([])
+        } else if (this.state.organisms[i][0].attributes[1].value == this.state.iAmDad) {
+          this.context.showStats2([])
+          this.context.showPunnett2([])
+        }
         this.state.organisms[i].remove()
         this.state.organisms.splice(i,1)
         i --;
@@ -283,20 +316,6 @@ const Organisms = React.createClass({
       }
     })
     this.context.router.replace('/home')
-  },
-
-  componentDidMount : function() {
-    if (this.state.organisms.length === 0) {
-      for (var i = 0; i < 10; i++) {
-        this.makeOrganisms($.now(),"new",'225px')
-      }
-    }
-  },
-
-  getInitialState : function() {
-    return {
-      organisms : []
-    }
   },
 
   render : function() {
