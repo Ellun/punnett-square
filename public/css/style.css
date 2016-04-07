@@ -128,7 +128,7 @@ body {
 #stats {
   left: 60%;
   width: 40%;
-  background-color: grey;
+  background-color: #00CCFF;
   height: 200px;
   position: absolute;
 }
@@ -195,7 +195,7 @@ body {
 }
 
 #punnett {
-  background-color: grey;
+  background-color: #00CCFF;
   top: 200px;
   width: 40%;
   height: 350px;
