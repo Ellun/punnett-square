@@ -10,6 +10,6 @@ CREATE TABLE users (
 
 CREATE TABLE scores (
   score_id SERIAL UNIQUE PRIMARY KEY,
-  user_id INT REFERENCES users,
+  user_id INT REFERENCES users ON DELETE CASCADE,
   score INT
 );

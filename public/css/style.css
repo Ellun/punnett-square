@@ -11,9 +11,11 @@
 }
 
 body {
-  background-image: url("../images/bodyBackground.png");
+  background: url("../images/bodyBackground.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-  background-repeat: no-repeat;
 }
 
 #signup, #login, #instructions, #scores, .setting {
@@ -79,6 +81,10 @@ body {
   line-height: 200%;
 }
 
+.header {
+  color: #F8F8F8 ;
+}
+
 #nope {
   background-image: url(../images/nope.jpg);
   width: 50%;
@@ -95,6 +101,7 @@ body {
   position: relative;
   border: 5px solid #0099FF;
   border-radius: 10px;
+  z-index: 1;
 }
 
 #weather {
@@ -126,12 +133,19 @@ body {
   z-index: 0;
 }
 
-.organisms {
+.organisms, .buds{
   width: 50px;
   height: 50px;
   background-image: url("../images/stonedude.png");
   position: absolute;
+}
+
+.organisms {
   z-index: 1;
+}
+
+.buds {
+  top: 85%;
 }
 
 #parent1, #parent2 {

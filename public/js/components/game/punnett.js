@@ -14,7 +14,6 @@ const Punnett = React.createClass({
   },
 
   updateSquares : function() {
-    console.log('hi');
     var x = 8;
     var y = 9;
       if ((this.context.punnett1.length > 0) && (this.context.punnett2.length > 0)) {
@@ -27,47 +26,27 @@ const Punnett = React.createClass({
       $('.bl').text(this.context.punnett1[y]);
       $('.tr').text(this.context.punnett2[x]);
       $('.br').text(this.context.punnett2[y]);
+    } else {
+      $('#tl').empty()
+      $('#bl').empty()
+      $('#tr').empty()
+      $('#br').empty()
+
+      $('.tl').empty()
+      $('.bl').empty()
+      $('.tr').empty()
+      $('.br').empty()
     }
   },
 
   componentDidMount : function() {
     var intervalID = window.setInterval(() => {
       this.updateSquares();
-      // var value = event.target.value
-
-      // switch (value) {
-      //   case 1:
-      //     x = 0;
-      //     y = 1;
-      //     break;
-      //   case 2:
-      //     x = 2;
-      //     y = 3;
-      //     break;
-      //   case 3:
-      //     x = 4;
-      //     y = 5;
-      //     break;
-      //   case 4:
-      //     x = 6;
-      //     y = 7;
-      //     break;
-      //   case 5:
-      //     x = 8;
-      //     y = 9;
-      //     break;
-      //   default:
-      //     break;
-      // }
     }, 500);
   },
 
 
   render : function() {
-    // <li value="1" className="punnett">Hair</li>
-    // <li value="2"className="punnett">Fat</li>
-    // <li value="3"className="punnett">Defense</li>
-    // <li value="4"className="punnett">Water</li>
     return (
       <div id="punnett">
 
