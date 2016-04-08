@@ -124,7 +124,7 @@ const Organisms = React.createClass({
     }
     $organism.attr('health',organism.health)
     $organism.css('top', topPosition)
-    $organism.css('left', '50%')
+    $organism.css('left', '90%')
     this.state.organisms.push($organism);
     $('#habitat').append($organism)
     // var $helmet = $('<div>');
@@ -138,7 +138,7 @@ const Organisms = React.createClass({
     $organism.hover((event) => {
       var $target = event.currentTarget;
       $('.floatingStats').text('Traits:' + $target.attributes[6].value + ' Health:' + $target.attributes[7].value);
-      $('.floatingStats').css('border', '1px solid black')
+      $('.floatingStats').css('border', '1px solid #0099FF')
     },
       () => {
         $('.floatingStats').empty();
@@ -213,6 +213,7 @@ const Organisms = React.createClass({
       $error.append(div)
       $('#weather').append($error)
     } else {
+      $('#error').remove();
       this.dropOff()
       var organisms = this.state.organisms
       this.context.showTurn(this.context.turn + 1)
@@ -276,9 +277,7 @@ const Organisms = React.createClass({
           this.state.organisms[i][0].attributes[7].value = $health
         }
       }
-      setTimeout(()=> {
         this.makeOrganisms($.now(),'woot','7%')
-      }, 2200)
     }
   },
 
@@ -316,7 +315,7 @@ const Organisms = React.createClass({
         }
       }
     })
-    this.context.router.replace('/home')
+    this.context.router.replace('/GameOver')
   },
 
   render : function() {
