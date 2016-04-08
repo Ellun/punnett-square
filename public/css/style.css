@@ -28,7 +28,7 @@ body {
 
 #signup, #login, #instructions, #scores, .setting {
   width: 50%;
-  height: 400px;
+  height: 450px;
   margin: 0 auto;
   margin-top: 50px;
   padding: 20px;
@@ -92,7 +92,7 @@ body {
   text-decoration: none;
   font-size: 30px;
   left: 40%;
-  top: 70%;
+  top: 65%;
   color: #F8F8F8;
 }
 
