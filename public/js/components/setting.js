@@ -46,12 +46,10 @@ const Setting = React.createClass({
     return (
       <div className="setting">
       <h1>Setting</h1>
-        <ul>
-          <li><a onClick={this.handleUpdatePassword}>Update Password</a></li>
-          <li><a onClick={this.handleLogout}>Logout</a></li>
-          <li><a onClick={this.handleDelete}>Delete Account</a></li>
-          <Link to="/home">back</Link>
-        </ul>
+          <div id="updatePass"><a onClick={this.handleUpdatePassword}>Update Password</a></div>
+          <div id="logout"><a onClick={this.handleLogout}>Logout</a></div>
+          <div id="deleteAccount"><a onClick={this.handleDelete}>Delete Account</a></div>
+          <Link id="scoresHome" to="/home">Menu</Link>
       </div>
     )
   }

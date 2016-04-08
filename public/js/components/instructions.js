@@ -11,7 +11,7 @@ const Instructions = React.createClass({
       <div id="instructions">
         <h1>Instructions</h1>
         <p> Stop sucking at games </p>
-        <Link to="/home">Menu</Link>
+        <Link id="scoresHome" to="/home">Menu</Link>
       </div>
     )
   }

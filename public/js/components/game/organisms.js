@@ -167,24 +167,27 @@ const Organisms = React.createClass({
         target.attributes[6].value[2]
       ]
 
-      var dataText = [
-        'Body Type :' + target.attributes[6].value + ' ',
-        'Health :' + target.attributes[7].value
-      ]
-
       $('#parent1').droppable({drop:()=>{
-        this.context.showStats1(dataText)
-        this.context.showPunnett1(data)
-        this.setState({iAmMom:target.attributes[1].value})
+          this.setState({iAmMom:target.attributes[1].value})
+          var dataText = [
+            'Body Type :' + $('#' + this.state.iAmMom).attr('bodyType'),
+            ' Health :' + $('#' + this.state.iAmMom).attr('health')
+          ]
+          this.context.showStats1(dataText)
+          this.context.showPunnett1(data)
       }},{out:()=>{
         this.context.showStats1([])
         this.context.showPunnett1([])
         this.setState({iAmMom:''})
       }})
       $('#parent2').droppable({drop:()=>{
-        this.context.showStats2(dataText)
-        this.context.showPunnett2(data)
-        this.setState({iAmDad:target.attributes[1].value})
+          this.setState({iAmDad:target.attributes[1].value})
+          var dataText = [
+            'Body Type :' + $('#' + this.state.iAmDad).attr('bodyType'),
+            ' Health :' + $('#' + this.state.iAmDad).attr('health')
+          ]
+          this.context.showStats2(dataText)
+          this.context.showPunnett2(data)
       }},{out:()=>{
         this.context.showStats2([])
         this.context.showPunnett2([])
@@ -260,24 +263,41 @@ const Organisms = React.createClass({
         var $health = this.state.organisms[i][0].attributes[7].value - health
         if ($health <= 0) {
           if (this.state.organisms[i][0].attributes[1].value == this.state.iAmMom) {
-            this.context.showStats1([])
-            this.context.showPunnett1([])
+            this.setState({iAmMom:''});
+            this.state.organisms[i].remove()
+            this.context.showStats1([]);
+            this.context.showPunnett1([]);
           } else if (this.state.organisms[i][0].attributes[1].value == this.state.iAmDad) {
+            this.setState({iAmDad:''})
+            this.state.organisms[i].remove()
             this.context.showStats2([])
             this.context.showPunnett2([])
           }
           this.state.organisms[i].remove()
           this.state.organisms.splice(i,1)
           i --;
-          if (this.state.organisms.length <= 1) {
-            this.loser();
-            break;
-          }
         } else {
           this.state.organisms[i][0].attributes[7].value = $health
+          if ($('#' + this.state.iAmMom).attr('health') > 0) {
+            var dataText = [
+              'Body Type :' + $('#' + this.state.iAmMom).attr('bodyType'),
+              ' Health :' + $('#' + this.state.iAmMom).attr('health')
+            ]
+            this.context.showStats1(dataText);
+          }
+          if ($('#' + this.state.iAmDad).attr('health') > 0) {
+            var dataText = [
+              'Body Type :' + $('#' + this.state.iAmDad).attr('bodyType'),
+              ' Health :' + $('#' + this.state.iAmDad).attr('health')
+            ]
+            this.context.showStats2(dataText);
+          }
         }
       }
         this.makeOrganisms($.now(),'woot','7%')
+    }
+    if (this.state.organisms.length <= 1) {
+      this.loser();
     }
   },
 

@@ -7,6 +7,10 @@ const Organisms = require('./organisms.js')
 const Punnett = React.createClass({
 
   contextTypes: {
+    stats1: React.PropTypes.array,
+    showStats1: React.PropTypes.func,
+    stats2: React.PropTypes.array,
+    showStats2: React.PropTypes.func,
     punnett1: React.PropTypes.array,
     showPunnett1: React.PropTypes.func,
     punnett2: React.PropTypes.array,
@@ -16,7 +20,7 @@ const Punnett = React.createClass({
   updateSquares : function() {
     var x = 8;
     var y = 9;
-      if ((this.context.punnett1.length > 0) && (this.context.punnett2.length > 0)) {
+    if ((this.context.punnett1.length > 0) && (this.context.punnett2.length > 0)) {
       $('#tl').text(this.context.punnett1[x] + this.context.punnett2[x]);
       $('#bl').text(this.context.punnett1[x] + this.context.punnett2[y]);
       $('#tr').text(this.context.punnett1[y] + this.context.punnett2[x]);
@@ -26,7 +30,7 @@ const Punnett = React.createClass({
       $('.bl').text(this.context.punnett1[y]);
       $('.tr').text(this.context.punnett2[x]);
       $('.br').text(this.context.punnett2[y]);
-    } else {
+  } else {
       $('#tl').empty()
       $('#bl').empty()
       $('#tr').empty()

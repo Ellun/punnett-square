@@ -39,15 +39,18 @@ const Scores = React.createClass({
   },
 
   render : function() {
-    var array = [];
+    var usernameArray = [];
+    var scoreArray = [];
     this.state.score.forEach((el)=>{
-      array.push(<li><strong>Player:</strong> {el.username},  <strong>Score:</strong> {el.score}</li>)
+      usernameArray.push(<li>{el.username}</li>)
+      scoreArray.push(<li>{el.score}</li>)
     })
     return (
       <div id="scores">
-      <h1> Player Scores </h1>
-      {array}
-      <Link to="/home">Menu</Link>
+        <h1> High Scores</h1>
+        <div id="usernameArray"><strong>Username</strong>{usernameArray}</div>
+        <div id="scoreArray"><strong>Scores</strong>{scoreArray}</div>
+        <Link id="scoresHome" to="/home">Menu</Link>
       </div>
     )
   }
