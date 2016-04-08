@@ -237,11 +237,11 @@ const Organisms = React.createClass({
         if (((organismBody == ['L','L']) && (weather == coldWeather)) || //checks lavagolems
             ((organismBody == ['I','I']) && (weather == hotWeather))     //checks icegolems
         ){
-          var weatherDMGs = 20
+          var weatherDMGs = 25
         } else if (((organismBody != ['I','I']) && (weather == coldWeather)) || //accounts for reg golems
                    ((organismBody != ['L','L']) && (weather == hotWeather))
           ){
-          var weatherDMGs = 15
+          var weatherDMGs = 20
         } else {
           weatherDMGs = 0 //if they golem matches the environment, no additional damage is delt
         }
@@ -259,7 +259,7 @@ const Organisms = React.createClass({
           habitatDMGs = 0 //if they golem matches the environment, no additional damage is delt
         }
 
-        var health = 70 + weatherDMGs + habitatDMGs;
+        var health = 10 + weatherDMGs + habitatDMGs;
         var $health = this.state.organisms[i][0].attributes[7].value - health
         if ($health <= 0) {
           if (this.state.organisms[i][0].attributes[1].value == this.state.iAmMom) {
