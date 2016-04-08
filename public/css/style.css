@@ -38,7 +38,7 @@ body {
   border: 5px solid #0099FF;
 }
 
-#updatePass, #logout, #deleteAccount {
+#updatePass, #logout, #deleteAccount, #loginUsername, #loginPassword, #confirmPassword, #newPassword, #currentPassword  {
   width: 20%;
   position: absolute;
   background-color: #0099FF;
@@ -48,29 +48,43 @@ body {
   left: 40%;
 }
 
-#logout {
+#loginUsername, #loginPassword, #confirmPassword, #newPassword, #currentPassword {
+  background-color: white;
+  color: #282828;
+}
+
+#loginSubmit, #signupSubmit {
+  border-style: none;
+  position: absolute;
+  width: 20%;
+  left: 40%;
+  font-size: 20px;
+  background-color: inherit;
+  top: 50%;
+  color: #F8F8F8;
+}
+
+#signupSubmit {
+  top: 60%;
+}
+
+#logout, #loginUsername, #currentPassword {
   top: 30%;
 }
 
-#logout:hover {
+#logout:hover, #updatePass:hover, #deleteAccount:hover, #scoresHome:hover, #loginSubmit:hover, #signupSubmit:hover{
   text-shadow: 1px 1px #E0E0E0;
 }
 
-#updatePass {
+#updatePass, #loginPassword,#newPassword {
   top: 40%;
 }
 
-#updatePass:hover {
-  text-shadow: 1px 1px #E0E0E0;
-}
 
-#deleteAccount {
+#deleteAccount, #confirmPassword {
   top: 50%;
 }
 
-#deleteAccount:hover {
-  text-shadow: 1px 1px #E0E0E0;
-}
 
 #scoresHome {
   position: absolute;
@@ -80,10 +94,6 @@ body {
   left: 40%;
   top: 70%;
   color: #F8F8F8;
-}
-
-#scoresHome:hover {
-  text-shadow: 1px 1px #E0E0E0;
 }
 
 #usernameArray {
@@ -154,6 +164,7 @@ body {
 
 .header {
   color: #F8F8F8 ;
+  font-size: 40px;
 }
 
 #nope {

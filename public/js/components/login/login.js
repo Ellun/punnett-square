@@ -58,16 +58,16 @@ const Login = React.createClass({
             <h1 className="header">Welcome back to punnett²!</h1>
             <input id="loginUsername" type="text" ref="username" placeholder="username"/>
             <input id="loginPassword" type="password" ref="password" placeholder="password" /><br />
-            <button type="submit">login</button>
-            <Link to="/signup">Signup</Link>
+            <button id="loginSubmit" type="submit">login</button>
+            <Link id="scoresHome" to="/signup">Signup</Link>
           </form>
         </div>
       )
     } else {
       return (
         <div id="signup">
-          <h3>You are already signed in!</h3>
-          <Link to="/home">Home</Link>
+          <h3 className="header">You are already signed in!</h3>
+          <Link id="scoresHome" to="/home">Home</Link>
         </div>
       )
     }

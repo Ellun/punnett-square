@@ -9,7 +9,7 @@ const Instructions = React.createClass({
   render : function() {
     return (
       <div id="instructions">
-        <h1>Instructions</h1>
+        <h1 className="header">Instructions</h1>
         <p> Stop sucking at games </p>
         <Link id="scoresHome" to="/home">Menu</Link>
       </div>

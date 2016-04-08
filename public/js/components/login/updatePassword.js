@@ -46,11 +46,12 @@ const UpdatePassword = React.createClass({
     return (
       <div className="setting">
         <form onSubmit={ this.handleSubmit }>
-          <h3>Update Password</h3>
+          <h3 className="header">Update Password</h3>
           <label><input id="currentPassword" type="password" ref="currentPassword" placeholder="current password"/></label>
           <label><input id="newPassword" type="password" ref="newPassword" placeholder="new password"/></label>
           <label><input id="confirmPassword" type="password" ref="confirmPassword" placeholder="confirm password" /></label><br />
-          <button type="submit">confirm</button>
+          <button id="signupSubmit" type="submit">Confirm</button>
+          <Link id="scoresHome" to="/home">Menu</Link>
         </form>
       </div>
     )

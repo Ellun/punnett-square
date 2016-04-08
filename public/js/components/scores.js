@@ -47,7 +47,7 @@ const Scores = React.createClass({
     })
     return (
       <div id="scores">
-        <h1> High Scores</h1>
+        <h1 className="header"> High Scores</h1>
         <div id="usernameArray"><strong>Username</strong>{usernameArray}</div>
         <div id="scoreArray"><strong>Scores</strong>{scoreArray}</div>
         <Link id="scoresHome" to="/home">Menu</Link>

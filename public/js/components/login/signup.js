@@ -43,8 +43,8 @@ const Signup = React.createClass({
             <input id="loginUsername" type="text" ref="username" placeholder="username"/>
             <input id="loginPassword" type="password" ref="password" placeholder="password" /><br />
             <input id="confirmPassword" type="password" ref="confirmPass" placeholder="confirm password" /><br />
-            <button type="submit">Signup</button>
-            <Link to="/login">Login</Link>
+            <button id="signupSubmit" type="submit">Signup</button>
+            <Link id="scoresHome" to="/login">Login</Link>
           </form>
         </div>
       )
