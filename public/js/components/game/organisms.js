@@ -250,11 +250,11 @@ const Organisms = React.createClass({
         if (((organismBody == ['L','L']) && (habitat == coldHabitat)) || //checks lavagolems
             ((organismBody == ['I','I']) && (habitat == hotHabitat))     //checks icegolems
         ){
-          var habitatDMGs = 20
+          var habitatDMGs = 30
         } else if (((organismBody != ["I","I"]) && (habitat == coldHabitat)) || //accounts for reg golems
                    ((organismBody != ['L','L']) && (habitat == hotHabitat))
           ){
-          var habitatDMGs = 15
+          var habitatDMGs = 20
         } else {
           habitatDMGs = 0 //if they golem matches the environment, no additional damage is delt
         }
@@ -294,10 +294,10 @@ const Organisms = React.createClass({
           }
         }
       }
+      if (this.state.organisms.length <= 1) {
+        this.loser();
+      }
         this.makeOrganisms($.now(),'woot','7%')
-    }
-    if (this.state.organisms.length <= 1) {
-      this.loser();
     }
   },
 
