@@ -9,7 +9,7 @@ const bodyParser   = require( 'body-parser' );
 const expressJWT   = require( 'express-jwt' );
 const jsonwebtoken = require( 'jsonwebtoken' );
 const bcrypt       = require( 'bcrypt' );
-const secret      = 'so secretive';
+const SECRET       = process.env.SECRET;
 
 const app = express();
 const userRoutes = require( path.join( __dirname, '/routes/users' ) );
@@ -21,7 +21,7 @@ app.use( bodyParser.urlencoded( { extended: false } ) );
 app.use( bodyParser.json() );
 
 app.use( '/users', userRoutes );
-app.use( '/score', expressJWT({secret:secret}), scoreRoutes );
+app.use( '/score', expressJWT({secret:SECRET}), scoreRoutes );
 
 app.get( '*', ( req,res ) => {
   res.sendFile( path.join( __dirname,'public/index.html') )

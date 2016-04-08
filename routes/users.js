@@ -4,7 +4,7 @@ const jwt         = require( 'jsonwebtoken' );
 const users       = express.Router();
 const bodyParser  = require( 'body-parser' );
 const db          = require( '../db/pgp.js' );
-const secret      = process.env.secret;
+const SECRET     = process.env.SECRET;
 
 
 users.use( function( error, request, response, next ) {
@@ -14,22 +14,22 @@ users.use( function( error, request, response, next ) {
 });
 
 users.post('/login', db.loginUser, ( req, res ) => {
-  var token = jwt.sign( res.rows, secret );
+  var token = jwt.sign( res.rows, SECRET );
   res.json( { agent: res.rows, token: token } );
 });
 
-users.delete( '/delete', expressJWT( { secret:secret } ), db.deleteUser, ( req,res ) => {
+users.delete( '/delete', expressJWT( { secret:SECRET } ), db.deleteUser, ( req,res ) => {
   res.send( 'deads' );
 });
 
-users.put( '/update', expressJWT( { secret:secret } ), db.updatePassword, ( req,res ) => {
+users.put( '/update', expressJWT( { secret:SECRET } ), db.updatePassword, ( req,res ) => {
   res.send( 'go' )
 });
 
 users.route('/')
   .get((req,res) => {res.json({data:'success'});})
   .post(db.createUser, db.loginUser,(req, res) => {
-    var token = jwt.sign( res.rows, secret );
+    var token = jwt.sign( res.rows, SECRET );
     res.json( { agent: res.rows, token: token } );
   });
 

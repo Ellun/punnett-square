@@ -259,7 +259,7 @@ const Organisms = React.createClass({
           habitatDMGs = 0 //if they golem matches the environment, no additional damage is delt
         }
 
-        var health = 10 + weatherDMGs + habitatDMGs;
+        var health = 70 + weatherDMGs + habitatDMGs;
         var $health = this.state.organisms[i][0].attributes[7].value - health
         if ($health <= 0) {
           if (this.state.organisms[i][0].attributes[1].value == this.state.iAmMom) {
@@ -302,6 +302,7 @@ const Organisms = React.createClass({
   },
 
   loser : function() {
+    console.log('I am at loser');
     var score = this.context.turn * 100;
     $.get({
       url : '/score',
