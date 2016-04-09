@@ -44,7 +44,7 @@ const Setting = React.createClass({
 
   render : function() {
     return (
-      <div className="setting">
+      <div id="login">
       <h1 className="header">Setting</h1>
           <div id="updatePass"><a onClick={this.handleUpdatePassword}>Update Password</a></div>
           <div id="logout"><a onClick={this.handleLogout}>Logout</a></div>

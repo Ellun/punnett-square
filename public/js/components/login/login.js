@@ -48,8 +48,8 @@ const Login = React.createClass({
         <div id="login">
           <form ref="form" onSubmit={this.handleSubmit}>
             <h1 className="header">Welcome back to punnett²!</h1>
-            <input id="loginUsername" type="text" ref="username" placeholder="username"/>
-            <input id="loginPassword" type="password" ref="password" placeholder="password" />
+            <input id="topInput" type="text" ref="username" placeholder="username"/>
+            <input id="middleInput" type="password" ref="password" placeholder="password" />
             <button id="loginSubmit" type="submit">login</button>
             <div id="loginError">{this.state.error}</div>
             <Link id="scoresHome" to="/signup">Signup</Link>

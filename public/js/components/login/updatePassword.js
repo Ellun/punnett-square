@@ -42,7 +42,7 @@ const UpdatePassword = React.createClass({
         }
       )
       .done((data) => {
-        if (data == 'error') {
+        if (data == 'error') { // error returned from server side
           this.setState({error:error});
         } else {
           this.context.router.replace('/home')
@@ -53,12 +53,12 @@ const UpdatePassword = React.createClass({
 
   render : function() {
     return (
-      <div className="setting">
+      <div id="login">
         <form onSubmit={ this.handleSubmit }>
           <h3 className="header">Update Password</h3>
-          <label><input id="currentPassword" type="password" ref="currentPassword" placeholder="current password"/></label>
-          <label><input id="newPassword" type="password" ref="newPassword" placeholder="new password"/></label>
-          <label><input id="confirmPassword" type="password" ref="confirmPassword" placeholder="confirm password" /></label><br />
+          <input id="topInput" type="password" ref="currentPassword" placeholder="current password"/>
+          <input id="middleInput" type="password" ref="newPassword" placeholder="new password"/>
+          <input id="botInput" type="password" ref="confirmPassword" placeholder="confirm password" />
           <button id="signupSubmit" type="submit">Confirm</button>
           <div id="loginError">{this.state.error}</div>
           <Link id="scoresHome" to="/home">Menu</Link>
