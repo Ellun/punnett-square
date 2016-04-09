@@ -38,6 +38,12 @@ body {
   border: 5px solid #0099FF;
 }
 
+#instructions p {
+  text-align: left;
+  font-size: 20px;
+  font-family: fantasy;
+  color: #F8F8F8;
+}
 #updatePass, #logout, #deleteAccount, #loginUsername, #loginPassword, #confirmPassword, #newPassword, #currentPassword  {
   width: 20%;
   position: absolute;
@@ -175,64 +181,41 @@ body {
   text-align: center;
 }
 
+/* Game */
 #gameContainer {
   width: 90%;
-  background-color: grey;
   height: 550px;
-  margin: 0 auto;
-  position: relative;
+  left: 5%;
+  top: 5%;
+  position: absolute;
+  background-color: #00CCFF;
   border: 5px solid #0099FF;
   border-radius: 10px;
   z-index: 1;
 }
 
-#weather {
+#weather, #habitat {
   width: 60%;
   height: 500px;
   position: absolute;
 }
 
 #habitat {
-  width: 60%;
   height: 350px;
-  position: absolute;
   top: 200px;
 }
 
 #stats {
   left: 60%;
   width: 40%;
-  background-color: #00CCFF;
   height: 200px;
   position: absolute;
-}
-
-.helmet {
-  width: 50px;
-  height: 50px;
-  background-image: url("../images/helmet.png");
-  position: absolute;
-  z-index: 0;
-}
-
-.organisms, .buds{
-  width: 50px;
-  height: 50px;
-  background-image: url("../images/stonedude.png");
-  position: absolute;
-}
-
-.organisms {
-  z-index: 1;
-}
-
-.buds {
-  top: 85%;
 }
 
 #parent1, #parent2 {
   width: 50px;
   height: 50px;
+  top: 10%;
   background-image: url("../images/dropstonedude.png");
   margin: 5px;
   position:absolute;
@@ -241,22 +224,20 @@ body {
 
 #parent1 {
   left: 15%;
-  top: 10%;
 }
 
 #parent2 {
   right: 15%;
-  top: 10%;
 }
 
 #stats1, #stats2 {
   background-color: #282828;
   color: #F8F8F8 ;
   width: 50%;
-  position: absolute;;
   height: 30px;
   left: 25%;
   text-align: center;
+  position: absolute;
   border-radius: 10px;
 }
 
@@ -269,7 +250,6 @@ body {
 }
 
 #punnett {
-  background-color: #00CCFF;
   top: 200px;
   width: 40%;
   height: 350px;
@@ -357,6 +337,22 @@ body {
   float: right;
   right: 30%;
   top: 50%;
+}
+
+/* organisms */
+.organisms, .buds{
+  width: 50px;
+  height: 50px;
+  background-image: url("../images/stonedude.png");
+  position: absolute;
+}
+
+.organisms {
+  z-index: 1;
+}
+
+.buds {
+  top: 85%;
 }
 
 #babies {
