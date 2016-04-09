@@ -12,8 +12,8 @@ const Signup = React.createClass({
   },
 
   contextTypes: {
-    setLoggedInTrue: React.PropTypes.func,
-    router: React.PropTypes.object
+    setLoggedInTrue : React.PropTypes.func,
+    router : React.PropTypes.object
   },
 
   /* when signup button is hit */

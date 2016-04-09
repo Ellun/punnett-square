@@ -47,7 +47,6 @@ function createUser( req, res, next ) {
 function loginUser( req, res, next ) {
   const username = req.body.username
   const password = req.body.password
-  console.log('made it to pgp');
   db.one( "SELECT * FROM users WHERE username LIKE $1;", [ username ] )
     .then( ( data ) => {
       if ( bcrypt.compareSync( password, data.password_digest ) ) {
@@ -65,30 +64,22 @@ function loginUser( req, res, next ) {
     })
 }
 
-function updatePassword( req, res, next) {
+function updatePassword (req, res, next) {
   const currentPassword = req.body.currentPass
   const newPassword = req.body.newPass
-  console.log('req:' ,req.user);
-
   db.one("SELECT * FROM users WHERE user_id=($1)", [req.user.user_id])
-    .then( (data) => {
-      if ( bcrypt.compareSync( currentPassword, data.password_digest) ) {
-        console.log('this sorta works');
-        createSecure( data.username, newPassword, updateUser )
+    .then((data)=>{
+      if (bcrypt.compareSync(currentPassword, data.password_digest)) {
+        createSecure(data.username, newPassword, updateUser)
         function updateUser(username, hash) {
           db.none("UPDATE users SET password_digest=($1) WHERE user_id=($2) ", [ hash, req.user.user_id ])
-          .then( ()=> {
-            next()
-          })
-          .catch( ( error )=>{
-            console.log( error );
-          })
         }
+        res.rows = 'success';
+        next();
+      } else {
+        res.rows = 'error';
         next();
       }
-    })
-    .catch( ( error ) => {
-      console.log( 'error I suck: ', error );
     })
 }
 

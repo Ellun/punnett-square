@@ -23,7 +23,7 @@ users.delete( '/delete', expressJWT( { secret:SECRET } ), db.deleteUser, ( req,r
 });
 
 users.put( '/update', expressJWT( { secret:SECRET } ), db.updatePassword, ( req,res ) => {
-  res.send( 'go' )
+  res.json(res.rows)
 });
 
 users.route('/')

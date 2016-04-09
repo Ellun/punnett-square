@@ -1,46 +1,55 @@
-const $ = require('jquery');
+const $     = require('jquery');
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const App = require('../../script.js')
-const Setting = require('../setting.js')
-const Home = require('../home.js')
 
+/* component to update password */
 const UpdatePassword = React.createClass({
 
-  contextTypes: {
-    router: React.PropTypes.object
+  getInitialState : function() {
+    return {
+      error : ''
+    }
   },
 
-  handleSubmit : function( event ) {
-  event.preventDefault();
+  contextTypes: {
+    router : React.PropTypes.object
+  },
 
-  const currentPass = this.refs.currentPassword.value;
-  const newPass = this.refs.newPassword.value;
-  const confirmPass =this.refs.confirmPassword.value;
+  handleSubmit : function(event) {
+    event.preventDefault(); // prevents page from refreshing
 
-  let data = {
-    currentPass : currentPass,
-    newPass : newPass
-  }
+    const currentPass = this.refs.currentPassword.value;
+    const newPass = this.refs.newPassword.value;
+    const confirmPass = this.refs.confirmPassword.value;
+    let error = 'passwords did not match'
 
-  if ( newPass != confirmPass ) {
-    alert('You failure, the passwords do not match')
-  } else {
-    $.ajax(
-      {
-        url : '/users/update',
-        data : data,
-        type: 'put',
-        beforeSend: function( xhr ) {
-          xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
+    let data = {
+      currentPass : currentPass,
+      newPass : newPass
+    }
+
+    if (newPass != confirmPass) {
+      this.setState({error:error})
+    } else {
+      $.ajax(
+        {
+          url : '/users/update',
+          data : data,
+          type: 'put',
+          beforeSend: function( xhr ) {
+            xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
+          }
         }
-      }
-    )
-    .done(() => {
-      this.context.router.replace('/home')
-    })
-  }
-},
+      )
+      .done((data) => {
+        if (data == 'error') {
+          this.setState({error:error});
+        } else {
+          this.context.router.replace('/home')
+        }
+      })
+    }
+  },
 
   render : function() {
     return (
@@ -51,6 +60,7 @@ const UpdatePassword = React.createClass({
           <label><input id="newPassword" type="password" ref="newPassword" placeholder="new password"/></label>
           <label><input id="confirmPassword" type="password" ref="confirmPassword" placeholder="confirm password" /></label><br />
           <button id="signupSubmit" type="submit">Confirm</button>
+          <div id="loginError">{this.state.error}</div>
           <Link id="scoresHome" to="/home">Menu</Link>
         </form>
       </div>

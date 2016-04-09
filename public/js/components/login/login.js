@@ -12,8 +12,8 @@ const Login = React.createClass({
   },
 
   contextTypes: {
-    setLoggedInTrue: React.PropTypes.func, // determines if logged in or not
-    router: React.PropTypes.object // redirects to a different view
+    setLoggedInTrue : React.PropTypes.func, // determines if logged in or not
+    router : React.PropTypes.object // redirects to a different view
   },
 
   /* When login button is hit */
