@@ -12,7 +12,7 @@ const Habitat = React.createClass({
         this.updateHabitat()
         this.context.showHabitat(false)
       }
-    }, 100);
+    }, 200);
   },
 
   contextTypes: {

@@ -1,37 +1,49 @@
-const $ = require('jquery');
-const React = require('react');
+const $     = require('jquery'); // requires jQuery npm module
+const React = require('react'); // requires React npm module
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const Play = require('../play.js');
+const Play  = require('../play.js'); // links to Play component
 
+/* Weather component will update the weather background image */
 const Weather = React.createClass({
 
-  componentDidMount : function() {
-    var intervalID = window.setInterval(() => {
-      if (this.context.weather == true) {
-        this.updateWeather()
+  componentDidMount : function() { // launches on render
+  /* Checks to see if weather needs to be updated */
+    let intervalID = window.setInterval(() => {
+      if (this.context.weather) {
+        this.selectWeather()
         this.context.showWeather(false)
       }
-    }, 100);
+    }, 200);
   },
 
   contextTypes: {
     turn : React.PropTypes.number,
-    showTurn : React.PropTypes.func,
     weather : React.PropTypes.bool,
     showWeather : React.PropTypes.func,
-    habitat : React.PropTypes.bool,
-    showHabitat : React.PropTypes.func,
     weatherImage : React.PropTypes.string,
     weatherBackground : React.PropTypes.func
   },
 
-  updateWeather : function() {
-    if (this.context.turn % 16 == 0 || this.context.turn % 31 == 0) {
-      var value = Math.floor(Math.random() * 2) + 2;
-    } else {
-      var value = Math.floor(Math.random() * 3) + 1;
+  /* randomly selects a new weather */
+  selectWeather : function() {
+    let value;
+
+    /* selects random value for switch function */
+    function rando(min,max) {
+      return value = Math.floor(Math.random() * max) + min;
     }
-    var background = this.context.weatherImage;
+
+    if (this.context.turn % 3 == 0) { // ensures harsher rounds
+      rando(2,2);
+    } else {
+      rando(1,3);
+    }
+    this.updateWeather(value)
+  },
+
+  /* updates weather background */
+  updateWeather : function(value) {
+    let background = this.context.weatherImage;
     switch (value) {
       case 1:
         background = 'url(' + "../../../images/bluesky.png" + ')';
@@ -42,14 +54,13 @@ const Weather = React.createClass({
       case 3:
         background = 'url(' + "../../../images/sunny.png" + ')';
         break;
-      default:
-        break;
     }
+    /* sets the background to new weather */
     this.context.weatherBackground(background)
   },
 
   render : function() {
-    var style = {
+    let style = {
       backgroundImage: this.context.weatherImage
     }
     return (
