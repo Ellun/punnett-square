@@ -28,7 +28,7 @@ users.put( '/update', expressJWT( { secret:SECRET } ), db.updatePassword, ( req,
 
 users.route('/')
   .get((req,res) => {res.json({data:'success'});})
-  .post(db.createUser, db.loginUser,(req, res) => {
+  .post(db.createUser,(req, res) => {
     var token = jwt.sign( res.rows, SECRET );
     res.json( { agent: res.rows, token: token } );
   });

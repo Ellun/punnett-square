@@ -38,8 +38,8 @@ function createUser( req, res, next ) {
       next();
     })
     .catch( function (error) {
-      // error;
-      console.log( 'error: ', error );
+      res.rows = 'error';
+      next();
     });
   }
 }
@@ -47,15 +47,20 @@ function createUser( req, res, next ) {
 function loginUser( req, res, next ) {
   const username = req.body.username
   const password = req.body.password
+  console.log('made it to pgp');
   db.one( "SELECT * FROM users WHERE username LIKE $1;", [ username ] )
     .then( ( data ) => {
       if ( bcrypt.compareSync( password, data.password_digest ) ) {
         res.rows = data
         next()
+      } else {
+        res.rows = 'error';
+        next();
       }
     })
     .catch( () => {
-      res.rows = "error";
+      console.log('I hit errors');
+      res.rows = 'error';
       next();
     })
 }

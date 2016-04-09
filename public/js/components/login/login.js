@@ -58,7 +58,7 @@ const Login = React.createClass({
       )
     } else {
       return (
-        <div id="signup"> // renders page if already logged in
+        <div id="login"> // renders page if already logged in
           <h3 className="header">You are already signed in!</h3>
           <Link id="scoresHome" to="/home">Home</Link>
         </div>
