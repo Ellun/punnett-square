@@ -27,8 +27,6 @@ const Habitat = React.createClass({
   },
 
   updateHabitat : function() {
-    console.log('this was true');
-    console.log(this.context.turn);
     if (this.context.turn % 16 == 0 || this.context.turn % 31 == 0) {
       var value = Math.floor(Math.random() * 2) + 2;
     } else {
