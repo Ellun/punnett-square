@@ -47,19 +47,16 @@ function createUser( req, res, next ) {
 function loginUser( req, res, next ) {
   const username = req.body.username
   const password = req.body.password
-  console.log("loginUser Section");
   db.one( "SELECT * FROM users WHERE username LIKE $1;", [ username ] )
     .then( ( data ) => {
       if ( bcrypt.compareSync( password, data.password_digest ) ) {
         res.rows = data
         next()
-      } else {
-        res.status( 401 ).json( { data:"Fool this no workie" } )
-        next()
       }
     })
     .catch( () => {
-      console.error( error )
+      res.rows = "error";
+      next();
     })
 }
 

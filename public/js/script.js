@@ -28,6 +28,27 @@ const App = React.createClass({
     }
   },
 
+  componentDidMount : function() {
+    function rando(max,min) {
+      return Math.floor(Math.random() * max) + min;
+    }
+
+    function hustle($buds) {
+      $buds.animate({'left': rando(90, 5) + '%'}, rando(8000,4000))
+      var intervalID = window.setInterval(() => {
+        $buds.animate({'left': rando(90, 5) + '%'}, rando(8000,4000))
+      }, 4000);
+    }
+
+    for (var i = 0; i < 15; i++) {
+      var $buds = $('<div>');
+      $buds.addClass('buds');
+      $buds.attr('id', $.now())
+      $('body').append($buds);
+      hustle($buds);
+    }
+  },
+
   childContextTypes: {
     loggedIn: React.PropTypes.bool,
     setLoggedInTrue: React.PropTypes.func

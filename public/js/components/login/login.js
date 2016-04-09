@@ -1,71 +1,64 @@
-const $ = require('jquery');
-const React = require('react');
+const $     = require('jquery'); // requires jQuery module
+const React = require('react'); // requires React module
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const App = require('../../script.js')
-const Signup = require('./signup.js')
 
+/* login component */
 const Login = React.createClass({
 
+  getInitialState : function() {
+    return {
+      error : ''
+    }
+  },
+
   contextTypes: {
-    loggedIn: React.PropTypes.bool,
-    setLoggedInTrue: React.PropTypes.func,
-    router: React.PropTypes.object
+    setLoggedInTrue: React.PropTypes.func, // determines if logged in or not
+    router: React.PropTypes.object // redirects to a different view
   },
 
-  componentDidMount : function() {
-    function rando(max,min) {
-      return Math.floor(Math.random() * max) + min;
-    }
-
-    function hustle($buds) {
-      $buds.animate({'left': rando(90, 5) + '%'}, rando(8000,4000))
-      var intervalID = window.setInterval(() => {
-        $buds.animate({'left': rando(90, 5) + '%'}, rando(8000,4000))
-      }, 4000);
-    }
-
-    for (var i = 0; i < 15; i++) {
-      var $buds = $('<div>');
-      $buds.addClass('buds');
-      $buds.attr('id', $.now())
-      $('body').append($buds);
-      hustle($buds);
-    }
-  },
-
+  /* When login button is hit */
   handleSubmit : function(event) {
-    event.preventDefault();
-    const username = this.refs.username.value
-    const password = this.refs.password.value
+    event.preventDefault(); // prevents page from refreshing
+    const username = this.refs.username.value;
+    const password = this.refs.password.value;
+    let error = 'Oops, please check your username or password'
+    if (username == '' || password == '') { // checks for real username/password
+      this.setState({error:error})
+    }
 
-    $.post('/users/login',{
+    $.post('/users/login',{ // AJAX post request to users/login route
       username: username,
       password: password
     })
     .done((data) => {
-      localStorage.token = data.token;
-      this.context.setLoggedInTrue(true);
-      this.context.router.replace('/home')
+      if (data.agent == 'error') { // if username/password doesn't match
+        this.setState({error:error})
+      } else { // if login is successful
+        localStorage.token = data.token;
+        this.context.setLoggedInTrue(true);
+        this.context.router.replace('/home')
+      }
     })
-    this.refs.form.reset()
+    this.refs.form.reset() // resets login form
   },
 
   render : function() {
-    if (!localStorage.token) {
+    if (!localStorage.token) { // renders login form when not logged in
       return (
         <div id="login">
           <form ref="form" onSubmit={this.handleSubmit}>
             <h1 className="header">Welcome back to punnett²!</h1>
             <input id="loginUsername" type="text" ref="username" placeholder="username"/>
-            <input id="loginPassword" type="password" ref="password" placeholder="password" /><br />
+            <input id="loginPassword" type="password" ref="password" placeholder="password" />
             <button id="loginSubmit" type="submit">login</button>
+            <div id="loginError">{this.state.error}</div>
             <Link id="scoresHome" to="/signup">Signup</Link>
           </form>
         </div>
       )
     } else {
       return (
-        <div id="signup">
+        <div id="signup"> // renders page if already logged in
           <h3 className="header">You are already signed in!</h3>
           <Link id="scoresHome" to="/home">Home</Link>
         </div>

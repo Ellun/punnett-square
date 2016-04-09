@@ -59,7 +59,7 @@ body {
   color: #282828;
 }
 
-#loginSubmit, #signupSubmit {
+#loginSubmit, #signupSubmit, #loginError {
   border-style: none;
   position: absolute;
   width: 20%;
@@ -72,6 +72,9 @@ body {
 
 #signupSubmit {
   top: 60%;
+}
+#loginError {
+  top: 55%;
 }
 
 #logout, #loginUsername, #currentPassword {
