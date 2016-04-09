@@ -2,14 +2,11 @@ const $ = require('jquery');
 require('jquery-ui')
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const Play = require('../play.js');
-const Weather = require('./weather.js');
-const Habitat = require('./habitat.js');
 
 const Organisms = React.createClass({
 
   componentDidMount : function() {
-    if (this.state.organisms.length === 0) {
+    if (this.state.organisms.length == 0) {
       for (var i = 0; i < 10; i++) {
         this.makeOrganisms($.now(),"new",'225px')
       }
@@ -25,23 +22,21 @@ const Organisms = React.createClass({
   },
 
   contextTypes: {
-    stats1: React.PropTypes.array,
-    showStats1: React.PropTypes.func,
-    stats2: React.PropTypes.array,
-    showStats2: React.PropTypes.func,
-    punnett1: React.PropTypes.array,
-    showPunnett1: React.PropTypes.func,
-    punnett2: React.PropTypes.array,
-    showPunnett2: React.PropTypes.func,
-    turn: React.PropTypes.number,
-    showTurn: React.PropTypes.func,
+    showStats1 : React.PropTypes.func,
+    showStats2 : React.PropTypes.func,
+    punnett1 : React.PropTypes.array,
+    showPunnett1 : React.PropTypes.func,
+    punnett2 : React.PropTypes.array,
+    showPunnett2 : React.PropTypes.func,
+    turn : React.PropTypes.number,
+    showTurn : React.PropTypes.func,
     weather : React.PropTypes.bool,
     showWeather : React.PropTypes.func,
     habitat : React.PropTypes.bool,
     showHabitat : React.PropTypes.func,
     weatherImage : React.PropTypes.string,
     habitatImage : React.PropTypes.string,
-    router: React.PropTypes.object
+    router : React.PropTypes.object
   },
 
   makeOrganisms : function(i, mode, topPosition) {

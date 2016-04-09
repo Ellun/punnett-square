@@ -78,7 +78,7 @@ body {
   top: 30%;
 }
 
-#logout:hover, #updatePass:hover, #deleteAccount:hover, #scoresHome:hover, #loginSubmit:hover, #signupSubmit:hover{
+#logout:hover, #updatePass:hover, #deleteAccount:hover, #scoresHome:hover, #loginSubmit:hover, #signupSubmit:hover, #header:hover{
   text-shadow: 1px 1px #E0E0E0;
 }
 

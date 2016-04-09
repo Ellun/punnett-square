@@ -1,7 +1,5 @@
-const $         = require('jquery'); // requires jQuery npm module
 const React     = require('react'); // requires React npm module
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const Play      = require('../play.js') // links to Play component
 const Organisms = require('./organisms.js') // links to Organisms component
 
 /* Habitat component will update the habitat background image */
