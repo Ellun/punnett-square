@@ -26,7 +26,11 @@ const Weather = React.createClass({
   },
 
   updateWeather : function() {
-    var value = Math.floor(Math.random() * 3) + 1;
+    if (this.context.turn % 16 == 0 || this.context.turn % 31 == 0) {
+      var value = Math.floor(Math.random() * 2) + 2;
+    } else {
+      var value = Math.floor(Math.random() * 3) + 1;
+    }
     var background = this.context.weatherImage;
     switch (value) {
       case 1:
