@@ -6,6 +6,14 @@ const Play  = require('../play.js'); // links to Play component
 /* Weather component will update the weather background image */
 const Weather = React.createClass({
 
+  contextTypes: {
+    turn : React.PropTypes.number,
+    weather : React.PropTypes.bool,
+    showWeather : React.PropTypes.func,
+    weatherImage : React.PropTypes.string,
+    weatherBackground : React.PropTypes.func
+  },
+
   componentDidMount : function() { // launches on render
   /* Checks to see if weather needs to be updated */
     let intervalID = window.setInterval(() => {
@@ -14,14 +22,6 @@ const Weather = React.createClass({
         this.context.showWeather(false)
       }
     }, 200);
-  },
-
-  contextTypes: {
-    turn : React.PropTypes.number,
-    weather : React.PropTypes.bool,
-    showWeather : React.PropTypes.func,
-    weatherImage : React.PropTypes.string,
-    weatherBackground : React.PropTypes.func
   },
 
   /* randomly selects a new weather */
