@@ -13,12 +13,12 @@ const IndexRoute      = ReactRouter.IndexRoute;
 
 const Login           = require('./components/account/login.js');
 const Signup          = require('./components/account/signup.js');
-const Home            = require('./components/home.js');
 const Setting         = require('./components/account/setting.js');
 const UpdatePassword  = require('./components/account/updatePassword.js');
-const Instructions    = require('./components/instructions.js');
-const Scores          = require('./components/scores.js');
-const Play            = require('./components/play.js');
+const Home            = require('./components/home/home.js');
+const Instructions    = require('./components/home/instructions.js');
+const Scores          = require('./components/home/scores.js');
+const Play            = require('./components/home/play.js');
 const Gg              = require('./components/game/gg.js');
 
 const App = React.createClass({
@@ -28,6 +28,7 @@ const App = React.createClass({
     }
   },
 
+  /* adds fun animation to back ground */
   componentDidMount : function() {
     function rando(max,min) {
       return Math.floor(Math.random() * max) + min;

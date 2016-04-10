@@ -1,23 +1,22 @@
-const $ = require('jquery');
+const $     = require('jquery');
 require('jquery-ui')
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
 
 const Organisms = React.createClass({
 
-  componentDidMount : function() {
-    if (this.state.organisms.length == 0) {
-      for (var i = 0; i < 10; i++) {
-        this.makeOrganisms($.now(),"new",'225px')
-      }
-    }
-  },
-
   getInitialState : function() {
     return {
       organisms : [],
       iAmMom : '',
       iAmDad : ''
+    }
+  },
+
+  /* makes golems on start of a game */
+  componentDidMount : function() {
+    for (var i = 0; i < 10; i++) {
+      this.makeOrganisms($.now(),"new",'225px')
     }
   },
 
@@ -40,61 +39,65 @@ const Organisms = React.createClass({
   },
 
   makeOrganisms : function(i, mode, topPosition) {
+    /* generates random number */
     function rando(max,min) {
       return Math.floor(Math.random() * max) + min;
     }
 
-    var gene = (mode,x,y) => {
+    /*sets initial genes and passes parental genes */
+    let gene = (mode,x,y) => {
       if (mode == "new") {
-        var array = [];
-        for (var i = 0; i < 2; i++) {
-          var number = rando(3,1);
+        let array = [];
+        let value;
+        for (let i = 0; i < 2; i++) {
+          let number = rando(3,1);
           switch (number) {
             case 1:
-              var value = 'N';
+              value = 'N'; // stone golem gene
               break;
             case 2:
-              value = 'I';
+              value = 'I'; // ice golem gene
               break;
             case 3:
-              value = 'L';
-              break;
-            default:
+              value = 'L'; // lava golem gene
               break;
           }
           array.push(value);
         }
         return array;
       } else {
-        var value = rando(4,1);
+        let value = rando(4,1);
+        let p1 = this.context.punnett1;
+        let p2 = this.context.punnett2;
         switch (value) {
           case 1:
-            return [this.context.punnett1[x], this.context.punnett2[x]];
+            return [p1[x], p2[x]];
             break;
           case 2:
-            return [this.context.punnett1[x], this.context.punnett2[y]];
+            return [p1[x], p2[y]];
             break;
           case 3:
-            return [this.context.punnett1[y], this.context.punnett2[x]];
+            return [p1[y], p2[x]];
             break;
           case 4:
-            return [this.context.punnett1[y], this.context.punnett2[y]];
+            return [p1[y], p2[y]];
             break;
         }
       }
     }
 
+    /* constructor to make Organism */
     function Organism() {
       this.hair = gene(mode,0,1);
       this.fat = gene(mode,2,3);
       this.defense = gene(mode,4,5);
       this.water = gene(mode,6,7);
-      this.bodyType = gene(mode,8,9);
+      this.bodyType = gene(mode,8,9); // need to edit to just bodyType and health
       this.health = 100 ;
     }
 
     function hustle($organism){
-      var loop = 0;
+      let loop = 0;
       while (loop < 500) {
         $organism.animate({'left': rando(90, 1) + "%", 'top': rando(5,225) + "px"}, rando(8000,4000))
         loop ++
@@ -191,11 +194,12 @@ const Organisms = React.createClass({
     })
   },
 
+  /* creates stork to drop off baby */
   dropOff : function() {
-    var $stork = $('<div>');
+    let $stork = $('<div>');
     $stork.attr('id', 'stork');
     $('#habitat').append($stork);
-    $stork.animate({'right': '90%'}, 5000)
+    $stork.animate({'right': '110%'}, 5000)
     setTimeout(function() {
       $stork.remove()
     }, 5000)
@@ -296,9 +300,9 @@ const Organisms = React.createClass({
     }
   },
 
+  /* redirects to game over screen */
   loser : function() {
-    console.log('I am at loser');
-    var score = this.context.turn * 100;
+    let score = this.context.turn * 100;
     $.get({
       url : '/score',
       beforeSend: function( xhr ) {

@@ -1,5 +1,5 @@
-const $     = require('jquery');
-const React = require('react');
+const $     = require('jquery'); // requires jQuery module
+const React = require('react'); // requires React module
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
 
 const Scores = React.createClass({

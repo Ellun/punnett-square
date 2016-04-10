@@ -27,14 +27,14 @@ const Weather = React.createClass({
     let value;
 
     /* selects random value for switch function */
-    function rando(min,max) {
+    function rando(max, min) {
       return value = Math.floor(Math.random() * max) + min;
     }
 
     if (this.context.turn % 3 == 0) { // ensures harsher rounds
       rando(2,2);
     } else {
-      rando(1,3);
+      rando(3,1);
     }
     this.updateWeather(value)
   },

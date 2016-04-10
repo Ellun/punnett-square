@@ -1,13 +1,8 @@
-const React = require('react');
+const React = require('react'); // requires React module
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
 
+/* Home component */
 const Home = React.createClass({
-
-  contextTypes: {
-    loggedIn: React.PropTypes.bool,
-    setLoggedInTrue: React.PropTypes.func,
-    router: React.PropTypes.object
-  },
 
   render : function() {
     return (

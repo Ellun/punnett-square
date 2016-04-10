@@ -29,9 +29,9 @@ function createSecure(username, password, callback) {
 
 function createUser( req, res, next ) {
   createSecure( req.body.username, req.body.password, saveUser );
-
+  /* credit to vitaly-t for helping with queries */
   function saveUser( username, hash ) {
-    db.any( "INSERT INTO users (username, password_digest ) VALUES($1, $2) returning username, password_digest;", [ username, hash ] )
+    db.one( "INSERT INTO users (username, password_digest ) VALUES($1, $2) returning username, password_digest;", [ username, hash ] )
     .then(function ( data ) {
       // success;
       res.rows = data;

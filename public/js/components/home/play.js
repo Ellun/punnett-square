@@ -1,10 +1,9 @@
-const $ = require('jquery');
-const React = require('react');
+const React = require('react'); // requires React module
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const Weather = require('./game/weather.js')
-const Habitat = require('./game/habitat.js')
-const Stats   = require('./game/stats.js')
-const Punnett   = require('./game/punnett.js')
+const Weather = require('../game/weather.js')
+const Habitat = require('../game/habitat.js')
+const Stats   = require('../game/stats.js')
+const Punnett = require('../game/punnett.js')
 
 const Play = React.createClass({
 

@@ -1,5 +1,5 @@
-const $     = require('jquery');
-const React = require('react');
+const $     = require('jquery'); // requires jQuery module
+const React = require('react'); // requires React module
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
 
 /* component to update password */
@@ -28,7 +28,7 @@ const UpdatePassword = React.createClass({
       newPass : newPass
     }
 
-    if (newPass != confirmPass || newPass == '') {
+    if (newPass != confirmPass || newPass == '') { //checks password before query
       this.setState({error:error})
     } else {
       $.ajax(
