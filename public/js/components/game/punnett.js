@@ -17,8 +17,8 @@ const Punnett = React.createClass({
 
   /* fills punnett squares with trait values */
   updateSquares : function() {
-    let x = 8;
-    let y = 9;
+    let x = 0;
+    let y = 1;
     let p1 = this.context.punnett1;
     let p2 = this.context.punnett2;
     if ((p1.length > 0) && (p2.length > 0)) {

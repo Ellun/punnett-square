@@ -49,8 +49,8 @@ const Organisms = React.createClass({
       if (mode == "new") {
         let array = [];
         let value;
-        for (let i = 0; i < 2; i++) {
-          let number = rando(3,1);
+        for (let i = 0; i < 2; i++) { // grabs two genes
+          let number = rando(3,1); // selects random gene
           switch (number) {
             case 1:
               value = 'N'; // stone golem gene
@@ -65,7 +65,7 @@ const Organisms = React.createClass({
           array.push(value);
         }
         return array;
-      } else {
+      } else { // grabing traits from parents
         let value = rando(4,1);
         let p1 = this.context.punnett1;
         let p2 = this.context.punnett2;
@@ -88,98 +88,74 @@ const Organisms = React.createClass({
 
     /* constructor to make Organism */
     function Organism() {
-      this.hair = gene(mode,0,1);
-      this.fat = gene(mode,2,3);
-      this.defense = gene(mode,4,5);
-      this.water = gene(mode,6,7);
-      this.bodyType = gene(mode,8,9); // need to edit to just bodyType and health
+      this.bodyType = gene(mode,0,1); // need to edit to just bodyType and health
       this.health = 100 ;
     }
 
+    /* keeps organisms moving */
     function hustle($organism){
       let loop = 0;
-      while (loop < 500) {
+      while (loop < 100) {
         $organism.animate({'left': rando(90, 1) + "%", 'top': rando(5,225) + "px"}, rando(8000,4000))
         loop ++
       }
     }
 
-    var organism = new Organism();
-    var $organism = $('<div>');
-    var $floatingStats = $('<div>');
-    $floatingStats.addClass('floatingStats')
-    $organism.addClass('organisms')
-    $organism.attr('id','organisms' + i)
-    $organism.attr('hair',organism.hair)
-    $organism.attr('fat',organism.fat)
-    $organism.attr('defense',organism.defense)
-    $organism.attr('water',organism.water)
-    $organism.attr('bodyType',organism.bodyType)
+    let organism = new Organism(); // calls constructor to create organism
+    let $organism = $('<div>'); // create a div
+    let $floatingStats = $('<div>').addClass('floatingStats'); // stats will be displayed floating above
+    $organism.addClass('organisms').attr({'id':'organisms' + i, 'bodyType':organism.bodyType, 'health':organism.health});
     if ($organism.attr('bodyType') == ['I','I']) {
       $organism.css('background-image', 'url(../../../images/icedude.png)')
     } else if ($organism.attr('bodyType') == ['L','L']) {
       $organism.css('background-image', 'url(../../../images/lavadude.png)')
     }
-    $organism.attr('health',organism.health)
-    $organism.css('top', topPosition)
-    $organism.css('left', '90%')
+    $organism.css({'top':topPosition, 'left': '90%'}); // sets start point
     this.state.organisms.push($organism);
-    $('#habitat').append($organism)
-    // var $helmet = $('<div>');
-    // $helmet.addClass('helmet')
-    // if ($organism.attr('defense') == [1,1]) {
-    //   $organism.append($helmet)
-    // }
-    $organism.draggable();
-    hustle($organism);
+    $('#habitat').append($organism);
+    $organism.draggable(); // makes organisms draggable
+    hustle($organism); // animates organisms
 
-    $organism.hover((event) => {
-      var $target = event.currentTarget;
-      $('.floatingStats').text('Traits:' + $target.attributes[6].value + ' Health:' + $target.attributes[7].value);
-      $('.floatingStats').css('border', '1px solid #0099FF')
+    /* on hover */
+    $organism.hover((event) => { // displays target attributes
+      let $target = event.currentTarget;
+      $('.floatingStats').text('Traits:' + $target.attributes[2].value + ' Health:' + $target.attributes[3].value);
+      $('.floatingStats').css('border', '1px solid #0099FF');
     },
-      () => {
+      () => { // off hover
         $('.floatingStats').empty();
         $('.floatingStats').css('border', 'none');
       }
     )
 
     $organism.mousedown((event) => {
-      var target = event.currentTarget;
-      var id = target.attributes[1].value
-      $("#" + id ).stop(true);
-      $('#habitat').droppable({drop: function(){
+      let target = event.currentTarget;
+      let id = target.attributes[1].value
+      $("#" + id ).stop(true); // stops animation
+      $('#habitat').droppable({drop: function(){ //when dropped in habitat, run
         hustle($("#" + id ));
       }});
 
-      var data = [
+      let data = [ // saves attributes in array
         target.attributes[2].value[0],
-        target.attributes[2].value[2],
-        target.attributes[3].value[0],
-        target.attributes[3].value[2],
-        target.attributes[4].value[0],
-        target.attributes[4].value[2],
-        target.attributes[5].value[0],
-        target.attributes[5].value[2],
-        target.attributes[6].value[0],
-        target.attributes[6].value[2]
+        target.attributes[2].value[2]
       ]
-
-      $('#parent1').droppable({drop:()=>{
-          this.setState({iAmMom:target.attributes[1].value})
-          var dataText = [
+      /* try to refactor into 1 function */
+      $('#parent1').droppable({drop:()=>{ // shows stats on drop
+          this.setState({iAmMom:id}) // saves id for reset later
+          let dataText = [ // displays this in stats
             'Body Type :' + $('#' + this.state.iAmMom).attr('bodyType'),
             ' Health :' + $('#' + this.state.iAmMom).attr('health')
           ]
           this.context.showStats1(dataText)
           this.context.showPunnett1(data)
-      }},{out:()=>{
+      }},{out:()=>{ // reset on out
         this.context.showStats1([])
         this.context.showPunnett1([])
         this.setState({iAmMom:''})
       }})
       $('#parent2').droppable({drop:()=>{
-          this.setState({iAmDad:target.attributes[1].value})
+          this.setState({iAmDad:id})
           var dataText = [
             'Body Type :' + $('#' + this.state.iAmDad).attr('bodyType'),
             ' Health :' + $('#' + this.state.iAmDad).attr('health')
@@ -207,40 +183,41 @@ const Organisms = React.createClass({
 
   handleBaby : function() {
     if ((this.context.punnett1.length == 0) || (this.context.punnett2.length == 0)) {
-      var $error = $('<div>').attr('id', 'error');
+      let $error = $('<div>').attr('id', 'error');
       $error.click(()=>{
         $error.remove();
       })
-      var div = $('<div>').addClass('error').append('<p>Uh Oh, looks like you forgot to select your parents!</p>');
-      $error.append(div)
-      $('#weather').append($error)
+      let div = $('<div>').addClass('error').append('<p>Uh Oh, looks like you forgot to select your parents!</p>');
+      $error.append(div);
+      $('#weather').append($error);
     } else {
       $('#error').remove();
-      this.dropOff()
-      var organisms = this.state.organisms
-      this.context.showTurn(this.context.turn + 1)
+      this.dropOff() // calls stork
+      let organisms = this.state.organisms;
+      this.context.showTurn(this.context.turn + 1);
       if (this.context.turn % 5 == 0) {
         this.context.showWeather(true);
         this.context.showHabitat(true);
       }
-      for (var i = 0; i < this.state.organisms.length; i++) {
-        var coldWeather = 'url(' + "../../../images/cold.png" + ')';
-        var coldHabitat = 'url(' + "../../../images/iceworld.png" + ')';
-        var hotWeather = 'url(' + "../../../images/sunny.png" + ')';
-        var hotHabitat = 'url(' + "../../../images/landosand.png" + ')';
-        var weather = this.context.weatherImage;
-        var habitat = this.context.habitatImage;
-        var organismBody = organisms[i][0].attributes[6].value
-
+      for (let i = 0; i < organisms.length; i++) {
+        let coldWeather = 'url(' + "../../../images/cold.png" + ')';
+        let coldHabitat = 'url(' + "../../../images/iceworld.png" + ')';
+        let hotWeather = 'url(' + "../../../images/sunny.png" + ')';
+        let hotHabitat = 'url(' + "../../../images/landosand.png" + ')';
+        let weather = this.context.weatherImage;
+        let habitat = this.context.habitatImage;
+        let organismBody = organisms[i][0].attributes[2].value;
+        let weatherDMGs;
+        let habitatDMGs;
         // Damage caused by the weather
         if (((organismBody == ['L','L']) && (weather == coldWeather)) || //checks lavagolems
             ((organismBody == ['I','I']) && (weather == hotWeather))     //checks icegolems
         ){
-          var weatherDMGs = 25
+          weatherDMGs = 25
         } else if (((organismBody != ['I','I']) && (weather == coldWeather)) || //accounts for reg golems
                    ((organismBody != ['L','L']) && (weather == hotWeather))
           ){
-          var weatherDMGs = 20
+          weatherDMGs = 20
         } else {
           weatherDMGs = 0 //if they golem matches the environment, no additional damage is delt
         }
@@ -249,54 +226,57 @@ const Organisms = React.createClass({
         if (((organismBody == ['L','L']) && (habitat == coldHabitat)) || //checks lavagolems
             ((organismBody == ['I','I']) && (habitat == hotHabitat))     //checks icegolems
         ){
-          var habitatDMGs = 30
+          habitatDMGs = 30
         } else if (((organismBody != ["I","I"]) && (habitat == coldHabitat)) || //accounts for reg golems
                    ((organismBody != ['L','L']) && (habitat == hotHabitat))
           ){
-          var habitatDMGs = 20
+          habitatDMGs = 20
         } else {
           habitatDMGs = 0 //if they golem matches the environment, no additional damage is delt
         }
 
-        var health = 10 + weatherDMGs + habitatDMGs;
-        var $health = this.state.organisms[i][0].attributes[7].value - health
+        let health = 10 + weatherDMGs + habitatDMGs;
+        let $health = organisms[i][0].attributes[3].value - health
+        let mama = this.state.iAmMom;
+        let pops = this.state.iAmDad;
         if ($health <= 0) {
-          if (this.state.organisms[i][0].attributes[1].value == this.state.iAmMom) {
+          if (organisms[i][0].attributes[1].value == mama) {
             this.setState({iAmMom:''});
-            this.state.organisms[i].remove()
+            organisms[i].remove()
             this.context.showStats1([]);
             this.context.showPunnett1([]);
-          } else if (this.state.organisms[i][0].attributes[1].value == this.state.iAmDad) {
+          } else if (organisms[i][0].attributes[1].value == pops) {
             this.setState({iAmDad:''})
-            this.state.organisms[i].remove()
+            organisms[i].remove()
             this.context.showStats2([])
             this.context.showPunnett2([])
           }
-          this.state.organisms[i].remove()
-          this.state.organisms.splice(i,1)
+          organisms[i].remove()
+          organisms.splice(i,1)
           i --;
         } else {
-          this.state.organisms[i][0].attributes[7].value = $health
-          if ($('#' + this.state.iAmMom).attr('health') > 0) {
+          organisms[i][0].attributes[3].value = $health
+          if ($('#' + mama).attr('health') > 0) {
             var dataText = [
-              'Body Type :' + $('#' + this.state.iAmMom).attr('bodyType'),
-              ' Health :' + $('#' + this.state.iAmMom).attr('health')
+              'Body Type :' + $('#' + mama).attr('bodyType'),
+              ' Health :' + $('#' + mama).attr('health')
             ]
             this.context.showStats1(dataText);
           }
-          if ($('#' + this.state.iAmDad).attr('health') > 0) {
+          if ($('#' + pops).attr('health') > 0) {
             var dataText = [
-              'Body Type :' + $('#' + this.state.iAmDad).attr('bodyType'),
-              ' Health :' + $('#' + this.state.iAmDad).attr('health')
+              'Body Type :' + $('#' + pops).attr('bodyType'),
+              ' Health :' + $('#' + pops).attr('health')
             ]
             this.context.showStats2(dataText);
           }
         }
       }
-      if (this.state.organisms.length <= 1) {
+      if (organisms.length <= 1) {
         this.loser();
-      }
+      } else {
         this.makeOrganisms($.now(),'woot','7%')
+      }
     }
   },
 
@@ -335,7 +315,7 @@ const Organisms = React.createClass({
         }
       }
     })
-    this.context.router.replace('/GameOver')
+    this.context.router.replace('/GameOver');
   },
 
   render : function() {
