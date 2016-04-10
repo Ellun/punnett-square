@@ -35,9 +35,15 @@ const Signup = React.createClass({
         if (data.agent == 'error') { // if the username is already taken
           this.setState({error:'that username already exists, please re-select'})
         } else { // if the account creation is successful
-          localStorage.token = data.token;
-          this.context.setLoggedInTrue(true);
-          this.context.router.replace('/home')
+          $.post('/users/login',{ // AJAX post request to users/login route
+            username: username,
+            password: password
+          })
+          .done((data) => {
+            localStorage.token = data.token;
+            this.context.setLoggedInTrue(true);
+            this.context.router.replace('/home')
+          })
         }
       })
     }

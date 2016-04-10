@@ -1,4 +1,3 @@
-const $ = require('jquery');
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
 
@@ -24,8 +23,7 @@ const Instructions = React.createClass({
         Stone golems is anything else!
         </p>
 
-
-        <Link id="scoresHome" to="/home">Menu</Link>
+        <Link id="scoresHome" to="/home">Home</Link>
       </div>
     )
   }

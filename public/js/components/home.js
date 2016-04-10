@@ -3,10 +3,6 @@ import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler
 
 const Home = React.createClass({
 
-  showScore : function(value) {
-    this.setState({score: value});
-  },
-
   contextTypes: {
     loggedIn: React.PropTypes.bool,
     setLoggedInTrue: React.PropTypes.func,

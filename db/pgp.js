@@ -16,13 +16,13 @@ if(process.env.ENVIRONMENT === 'production') {
 
 const db = pgp(cn);
 
-function createSecure( username, password, callback ) {
+function createSecure(username, password, callback) {
   //hashing the password given by the user at signup
-  bcrypt.genSalt( function( err, salt ) {
-    bcrypt.hash( password, salt, function( err, hash ){
+  bcrypt.genSalt(function(err, salt) {
+    bcrypt.hash(password, salt, function(err, hash) {
       //this callback saves the user to our databoard
       //with the hashed password
-      callback( username, hash );
+      callback(username, hash);
     })
   })
 }
@@ -113,7 +113,7 @@ function checkScore (req, res, next) {
     next();
   })
   .catch((error) => {
-    console.log( error)
+    console.log(error)
     res.rows = "wrong wrong wrong"
     next()
   })
@@ -126,14 +126,13 @@ function updateScore (req, res, next) {
     next();
   })
   .catch((error) => {
-    console.log( error)
+    console.log(error)
     res.rows = "wrong wrong wrong"
     next()
   })
 }
 
 function allScores (req, res, next) {
-  console.log('yayayayayaayayayayayayaya');
   db.any('SELECT users.username, scores.score FROM users INNER JOIN scores ON users.user_id=scores.user_id ORDER BY score desc LIMIT 10;')
   .then ((data)=>{
     console.log('data from sql',data);
@@ -141,8 +140,7 @@ function allScores (req, res, next) {
     next();
   })
   .catch((error) => {
-    console.log("you are hitting this");
-    console.log( error)
+    console.log(error)
     res.rows = "wrong wrong wrong"
     next()
   })

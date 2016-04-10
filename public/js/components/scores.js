@@ -1,8 +1,6 @@
-const $ = require('jquery');
+const $     = require('jquery');
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const App = require('../script.js')
-const Home = require('./home.js')
 
 const Scores = React.createClass({
 
@@ -22,6 +20,10 @@ const Scores = React.createClass({
       score : this.state.score,
       showScore : this.showScore
     }
+  },
+
+  showScore : function(value) {
+    this.setState({score: value});
   },
 
   componentDidMount : function() {
@@ -46,10 +48,10 @@ const Scores = React.createClass({
     })
     return (
       <div id="scores">
-        <h1 className="header"> High Scores</h1>
+        <h1 className="header">High Scores</h1>
         <div id="usernameArray"><strong>Username</strong>{usernameArray}</div>
         <div id="scoreArray"><strong>Scores</strong>{scoreArray}</div>
-        <Link id="scoresHome" to="/home">Menu</Link>
+        <Link id="scoresHome" to="/home">Home</Link>
       </div>
     )
   }
