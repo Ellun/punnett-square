@@ -2,7 +2,6 @@ const $ = require('jquery');
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
 const Play = require('../play.js')
-const Setting = require('../setting.js')
 
 const Stats = React.createClass({
   contextTypes: {

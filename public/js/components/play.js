@@ -2,7 +2,6 @@ const $ = require('jquery');
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
 const App = require('../script.js')
-const Setting = require('./setting.js')
 const Home = require('./home.js')
 const Weather = require('./game/weather.js')
 const Habitat = require('./game/habitat.js')
