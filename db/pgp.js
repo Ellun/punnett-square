@@ -58,7 +58,6 @@ function loginUser( req, res, next ) {
       }
     })
     .catch( () => {
-      console.log('I hit errors');
       res.rows = 'error';
       next();
     })
@@ -89,7 +88,7 @@ function deleteUser ( req,res,next ) {
     next();
   })
   .catch((error) => {
-    console.log( error)
+    console.log(error)
   })
 }
 
@@ -99,7 +98,7 @@ function createScore (req, res, next) {
     next();
   })
   .catch((error) => {
-    console.log( error)
+    console.log(error)
   })
 }
 

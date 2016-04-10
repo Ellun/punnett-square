@@ -1,30 +1,29 @@
-const $ = require('jquery');
-const React = require('react');
+const $     = require('jquery'); // requires jQuery module
+const React = require('react'); // requires React module
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const App = require('../script.js')
-const Login = require('./login/login.js')
-const Signup = require('./login/signup.js')
 
 const Setting = React.createClass({
 
   contextTypes: {
-    loggedIn: React.PropTypes.bool,
-    setLoggedInTrue: React.PropTypes.func,
-    router: React.PropTypes.object
+    setLoggedInTrue : React.PropTypes.func,
+    router : React.PropTypes.object
   },
 
+  /* logs user out */
   handleLogout : function(event) {
     event.preventDefault();
-    delete localStorage.token
+    delete localStorage.token;
     this.context.setLoggedInTrue(false);
-    this.context.router.replace('/login')
+    this.context.router.replace('/login');
   },
 
+  /* redirects to the password update page */
   handleUpdatePassword : function(event) {
     event.preventDefault();
-    this.context.router.replace('/updatePassword')
+    this.context.router.replace('/updatePassword');
   },
 
+  /* deletes user */
   handleDelete : function(event) {
     event.preventDefault();
     $.ajax(
@@ -36,9 +35,9 @@ const Setting = React.createClass({
         }
     })
     .done(() => {
-      delete localStorage.token
+      delete localStorage.token;
       this.context.setLoggedInTrue(false);
-      this.context.router.replace('/login')
+      this.context.router.replace('/login');
     })
   },
 
@@ -46,10 +45,10 @@ const Setting = React.createClass({
     return (
       <div id="login">
       <h1 className="header">Setting</h1>
-          <div id="updatePass"><a onClick={this.handleUpdatePassword}>Update Password</a></div>
-          <div id="logout"><a onClick={this.handleLogout}>Logout</a></div>
-          <div id="deleteAccount"><a onClick={this.handleDelete}>Delete Account</a></div>
-          <Link id="scoresHome" to="/home">Menu</Link>
+          <div id="topInput"><a onClick={this.handleUpdatePassword}>Update Password</a></div>
+          <div id="middleInput"><a onClick={this.handleLogout}>Logout</a></div>
+          <div id="botInput"><a onClick={this.handleDelete}>Delete Account</a></div>
+          <Link id="scoresHome" to="/home">Home</Link>
       </div>
     )
   }

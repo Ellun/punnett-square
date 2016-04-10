@@ -1,13 +1,5 @@
-const $ = require('jquery');
 const React = require('react');
 import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler } from 'react-router'
-const App = require('../script.js')
-const Login = require('./login/login.js')
-const Signup = require('./login/signup.js')
-const Setting = require('./setting.js')
-const Instructions = require('./instructions.js')
-const Scores = require('./scores.js')
-const Play = require('./play.js')
 
 const Home = React.createClass({
 

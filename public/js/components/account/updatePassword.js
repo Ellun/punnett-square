@@ -28,7 +28,7 @@ const UpdatePassword = React.createClass({
       newPass : newPass
     }
 
-    if (newPass != confirmPass) {
+    if (newPass != confirmPass || newPass == '') {
       this.setState({error:error})
     } else {
       $.ajax(

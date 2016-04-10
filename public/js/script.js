@@ -11,11 +11,11 @@ const Link            = ReactRouter.Link;
 const browserHistory  = ReactRouter.browserHistory;
 const IndexRoute      = ReactRouter.IndexRoute;
 
-const Login           = require('./components/login/login.js');
-const Signup          = require('./components/login/signup.js');
+const Login           = require('./components/account/login.js');
+const Signup          = require('./components/account/signup.js');
 const Home            = require('./components/home.js');
-const Setting         = require('./components/setting.js');
-const UpdatePassword  = require('./components/login/updatePassword.js');
+const Setting         = require('./components/account/setting.js');
+const UpdatePassword  = require('./components/account/updatePassword.js');
 const Instructions    = require('./components/instructions.js');
 const Scores          = require('./components/scores.js');
 const Play            = require('./components/play.js');

@@ -45,58 +45,49 @@ body {
   color: #F8F8F8;
 }
 
-#topInput, #middleInput, #botInput, #updatePass, #logout, #deleteAccount {
+/* login forms */
+#topInput, #middleInput, #botInput, #loginSubmit, #signupSubmit, #loginError {
   width: 20%;
-  position: absolute;
-  background-color: #0099FF;
-  color: #F8F8F8;
-  border-radius: 5px;
-  font-size: 20px;
   left: 40%;
-}
-
-#topInput, #middleInput, #botInput {
+  position: absolute;
   background-color: white;
   color: #282828;
+  border-radius: 5px;
+  font-size: 20px;
 }
 
 #loginSubmit, #signupSubmit, #loginError {
   border-style: none;
-  position: absolute;
-  width: 20%;
-  left: 40%;
-  font-size: 20px;
   background-color: inherit;
   top: 50%;
   color: #F8F8F8;
 }
 
-#signupSubmit {
-  top: 60%;
-}
 #loginError {
   top: 55%;
   width: 40%;
   left: 30%;
 }
 
-#topInput, #logout {
+#topInput {
   top: 30%;
 }
 
-#logout:hover, #topInput:hover, #botInput:hover,#middleInput:hover, #updatePass:hover, #deleteAccount:hover, #scoresHome:hover, #loginSubmit:hover, #signupSubmit:hover, #header:hover{
-  text-shadow: 1px 1px #E0E0E0;
-}
-
-#updatePass, #middleInput {
+#middleInput {
   top: 40%;
 }
 
-
-#deleteAccount, #botInput{
+#botInput{
   top: 50%;
 }
 
+#signupSubmit {
+  top: 60%;
+}
+
+#topInput:hover, #middleInput:hover, #botInput:hover, #scoresHome:hover, #loginSubmit:hover, #signupSubmit:hover, #header:hover{
+  text-shadow: 1px 1px #E0E0E0;
+}
 
 #scoresHome {
   position: absolute;
