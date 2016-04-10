@@ -217,7 +217,7 @@ const Organisms = React.createClass({
         } else if (((organismBody != ['I','I']) && (weather == coldWeather)) || //accounts for reg golems
                    ((organismBody != ['L','L']) && (weather == hotWeather))
           ){
-          weatherDMGs = 20
+          weatherDMGs = 15
         } else {
           weatherDMGs = 0 //if they golem matches the environment, no additional damage is delt
         }
@@ -230,7 +230,7 @@ const Organisms = React.createClass({
         } else if (((organismBody != ["I","I"]) && (habitat == coldHabitat)) || //accounts for reg golems
                    ((organismBody != ['L','L']) && (habitat == hotHabitat))
           ){
-          habitatDMGs = 20
+          habitatDMGs = 25
         } else {
           habitatDMGs = 0 //if they golem matches the environment, no additional damage is delt
         }

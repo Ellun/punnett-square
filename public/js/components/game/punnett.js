@@ -4,6 +4,12 @@ import { browserHistory, Router, Route, Link, Redirect, Navigation, RouteHandler
 
 const Punnett = React.createClass({
 
+  getInitialState : function() {
+    return {
+      intervalID : -1
+    }
+  },
+
   contextTypes: {
     punnett1: React.PropTypes.array,
     punnett2: React.PropTypes.array
@@ -13,6 +19,12 @@ const Punnett = React.createClass({
     let intervalID = window.setInterval(() => {
       this.updateSquares();
     }, 500);
+    this.setState({intervalID:intervalID});
+  },
+
+  /* Harry provided me this code */
+  componentWillUnmount : function() {
+    clearInterval(this.state.intervalID);
   },
 
   /* fills punnett squares with trait values */
@@ -22,6 +34,7 @@ const Punnett = React.createClass({
     let p1 = this.context.punnett1;
     let p2 = this.context.punnett2;
     if ((p1.length > 0) && (p2.length > 0)) {
+      console.log('this is adding letters');
       $('#tl').text(p1[x] + p2[x]);
       $('#bl').text(p1[x] + p2[y]);
       $('#tr').text(p1[y] + p2[x]);
@@ -32,6 +45,7 @@ const Punnett = React.createClass({
       $('.tr').text(p2[x]);
       $('.br').text(p2[y]);
   } else {
+    console.log('this is emptying');
       $('#tl').empty()
       $('#bl').empty()
       $('#tr').empty()

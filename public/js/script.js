@@ -36,17 +36,43 @@ const App = React.createClass({
 
     function hustle($buds) {
       $buds.animate({'left': rando(90, 5) + '%'}, rando(8000,4000))
-      var intervalID = window.setInterval(() => {
+      let intervalID = window.setInterval(() => {
         $buds.animate({'left': rando(90, 5) + '%'}, rando(8000,4000))
       }, 4000);
     }
 
-    for (var i = 0; i < 15; i++) {
-      var $buds = $('<div>');
+    function makeBuds() {
+      let $buds = $('<div>');
       $buds.addClass('buds');
       $buds.attr('id', $.now())
       $('body').append($buds);
       hustle($buds);
+
+      $buds.click((event)=>{
+        event.preventDefault();
+        let value = rando(3,1)
+        let style;
+        let change;
+        switch (value) {
+          case 1:
+            style = 'background-image';
+            change = 'url(../../../images/icedude.png)';
+            break;
+          case 2:
+            style = 'background-image';
+            change = 'url(../../../images/lavadude.png)'
+            break;
+          case 3:
+            style = 'background-image';
+            change = 'url(../../../images/stonedude.png)';
+            break;
+        }
+        $buds.css(style,change);
+      })
+    }
+
+    for (let i = 0; i < 15; i++) {
+      makeBuds();
     }
   },
 
