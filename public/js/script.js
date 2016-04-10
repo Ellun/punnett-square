@@ -99,7 +99,6 @@ const App = React.createClass({
       </div>
     )
   }
-
 })
 
 const routes = (
