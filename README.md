@@ -1,5 +1,5 @@
 # Punnett²
-
+<https://punnett-square.herokuapp.com/>
 ***
 
 ## Synopsis
@@ -38,7 +38,7 @@
  * track my high-score
  * compare my score to other players
  * see the top 10 high-scores of all time
- 
+
 ***
 
 ## Database ERD
